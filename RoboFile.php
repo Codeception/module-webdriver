@@ -18,4 +18,11 @@ class RoboFile extends \Robo\Tasks
         $documentationFile = 'documentation.md';
         $this->generateDocumentationForClass($className, $documentationFile, $sourceMessage);
     }
+
+    public function server()
+    {
+        $this->taskServer()
+            ->dir('tests/data/app')
+            ->run();
+    }
 }

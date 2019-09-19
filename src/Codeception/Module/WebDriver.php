@@ -26,7 +26,6 @@ use Codeception\Test\Descriptor;
 use Codeception\Test\Interfaces\ScenarioDriven;
 use Codeception\TestInterface;
 use Codeception\Util\ActionSequence;
-use Codeception\Util\Debug;
 use Codeception\Util\Locator;
 use Codeception\Util\Uri;
 use Facebook\WebDriver\Cookie;
@@ -47,8 +46,6 @@ use Facebook\WebDriver\WebDriverElement;
 use Facebook\WebDriver\WebDriverExpectedCondition;
 use Facebook\WebDriver\WebDriverKeys;
 use Facebook\WebDriver\WebDriverSelect;
-use GuzzleHttp\Cookie\SetCookie;
-use Symfony\Component\DomCrawler\Crawler;
 
 /**
  * New generation Selenium WebDriver module.
@@ -310,7 +307,7 @@ class WebDriver extends CodeceptionModule implements
         'http_proxy_port'    => null,
         'ssl_proxy'          => null,
         'ssl_proxy_port'     => null,
-        'debug_log_entries'  => 15,
+        'debug_log_entries'  => null,
         'log_js_errors'      => false
     ];
 
@@ -531,6 +528,11 @@ class WebDriver extends CodeceptionModule implements
             $this->debug('WebDriver::debugWebDriverLogs method has been called when webDriver is not set');
             return;
         }
+        // don't show logs if log entries not set
+        if (!$this->config['debug_log_entries']) {
+            return;
+        }
+
         try {
             // Dump out latest Selenium logs
             $logs = $this->webDriver->manage()->getAvailableLogTypes();
@@ -1031,7 +1033,7 @@ class WebDriver extends CodeceptionModule implements
             return $this->matchFirstOrFail($page, $link);
         }
 
-        $locator = Crawler::xpathLiteral(trim($link));
+        $locator = static::xpathLiteral(trim($link));
 
         // narrow
         $xpath = Locator::combine(
@@ -1083,7 +1085,7 @@ class WebDriver extends CodeceptionModule implements
             return $fields;
         }
 
-        $locator = Crawler::xpathLiteral(trim($selector));
+        $locator = static::xpathLiteral(trim($selector));
         // by text or label
         $xpath = Locator::combine(
         // @codingStandardsIgnoreStart
@@ -1583,14 +1585,14 @@ class WebDriver extends CodeceptionModule implements
             return $this->matchFirstOrFail($this->getBaseElement(), $radioOrCheckbox);
         }
 
-        $locator = Crawler::xpathLiteral($radioOrCheckbox);
+        $locator = static::xpathLiteral($radioOrCheckbox);
         if ($context instanceof WebDriverElement && $context->getTagName() === 'input') {
             $contextType = $context->getAttribute('type');
             if (!in_array($contextType, ['checkbox', 'radio'], true)) {
                 return null;
             }
-            $nameLiteral = Crawler::xPathLiteral($context->getAttribute('name'));
-            $typeLiteral = Crawler::xPathLiteral($contextType);
+            $nameLiteral = static::xpathLiteral($context->getAttribute('name'));
+            $typeLiteral = static::xpathLiteral($contextType);
             $inputLocatorFragment = "input[@type = $typeLiteral][@name = $nameLiteral]";
             $xpath = Locator::combine(
             // @codingStandardsIgnoreStart
@@ -3134,6 +3136,8 @@ class WebDriver extends CodeceptionModule implements
     /**
      * Check if the cookie domain matches the config URL.
      *
+     * Taken from Guzzle\Cookie\SetCookie
+     *
      * @param array|Cookie $cookie
      * @return bool
      */
@@ -3143,10 +3147,21 @@ class WebDriver extends CodeceptionModule implements
             return true;
         }
 
-        $setCookie = new SetCookie();
-        $setCookie->setDomain($cookie['domain']);
+        $domain = parse_url($this->config['url'], PHP_URL_HOST);
 
-        return $setCookie->matchesDomain(parse_url($this->config['url'], PHP_URL_HOST));
+        // Remove the leading '.' as per spec in RFC 6265.
+        // http://tools.ietf.org/html/rfc6265#section-5.2.3
+        $cookieDomain = ltrim($cookie['domain'], '.');
+        // Domain not set or exact match.
+        if (!$cookieDomain || !strcasecmp($domain, $cookieDomain)) {
+            return true;
+        }
+        // Matching the subdomain according to RFC 6265.
+        // http://tools.ietf.org/html/rfc6265#section-5.1.3
+        if (filter_var($domain, FILTER_VALIDATE_IP)) {
+            return false;
+        }
+        return (bool) preg_match('/\.' . preg_quote($cookieDomain, '/') . '$/', $domain);
     }
 
     /**
@@ -3360,4 +3375,48 @@ class WebDriver extends CodeceptionModule implements
         }
         $this->webDriver->manage()->timeouts()->implicitlyWait(0);
     }
+
+    /**
+     * From symfony/dom-crawler
+     *
+     * Converts string for XPath expressions.
+     *
+     * Escaped characters are: quotes (") and apostrophe (').
+     *
+     *  Examples:
+     *
+     *     echo static::xpathLiteral('foo " bar');
+     *     //prints 'foo " bar'
+     *
+     *     echo static::xpathLiteral("foo ' bar");
+     *     //prints "foo ' bar"
+     *
+     *     echo static::xpathLiteral('a\'b"c');
+     *     //prints concat('a', "'", 'b"c')
+     *
+     * @return string Converted string
+     */
+    private static function xpathLiteral(string $s)
+        {
+            if (false === strpos($s, "'")) {
+                return sprintf("'%s'", $s);
+            }
+            if (false === strpos($s, '"')) {
+                return sprintf('"%s"', $s);
+            }
+            $string = $s;
+            $parts = [];
+            while (true) {
+                if (false !== $pos = strpos($string, "'")) {
+                    $parts[] = sprintf("'%s'", substr($string, 0, $pos));
+                    $parts[] = "\"'\"";
+                    $string = substr($string, $pos + 1);
+                } else {
+                    $parts[] = "'$string'";
+                    break;
+                }
+            }
+            return sprintf('concat(%s)', implode(', ', $parts));
+        }
+
 }
