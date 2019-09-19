@@ -1,0 +1,7 @@
+paths:
+    tests: tests
+    output: tests/outputs
+    data: tests/data
+    support: tests/support
+    envs: tests/envs
+actor_suffix: Tester
