@@ -26,6 +26,9 @@
     "require-dev": {
         "codeception/util-robohelpers": "dev-master"
     },
+    "suggest": {
+        "codeception/phpbuiltinserver": "Start and stop PHP built-in web server for your tests"
+    },
     "autoload":{
         "classmap": ["src/"]
     },
