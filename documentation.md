@@ -246,8 +246,8 @@ Returns current WebDriver session for saving
 *hidden API method, expected to be used from Helper classes*
  
 Change capabilities of WebDriver. Should be executed before starting a new browser session.
-This method expects a function to be passed which returns array or [WebDriver Desired Capabilities](https://github.com/facebook/php-webdriver/blob/community/lib/Remote/DesiredCapabilities.php) object.
-Additional [Chrome options](https://github.com/facebook/php-webdriver/wiki/ChromeOptions) (like adding extensions) can be passed as well.
+This method expects a function to be passed which returns array or [WebDriver Desired Capabilities](https://github.com/php-webdriver/php-webdriver/blob/community/lib/Remote/DesiredCapabilities.php) object.
+Additional [Chrome options](https://github.com/php-webdriver/php-webdriver/wiki/ChromeOptions) (like adding extensions) can be passed as well.
 
 ```php
 <?php // in helper
@@ -969,7 +969,7 @@ $I->executeInSelenium(function(\Facebook\WebDriver\Remote\RemoteWebDriver $webdr
 ```
 
 This runs in the context of the
-[RemoteWebDriver class](https://github.com/facebook/php-webdriver/blob/master/lib/remote/RemoteWebDriver.php).
+[RemoteWebDriver class](https://github.com/php-webdriver/php-webdriver/blob/master/lib/remote/RemoteWebDriver.php).
 Try not to use this command on a regular basis.
 If Codeception lacks a feature you need, please implement it and submit a patch.
 

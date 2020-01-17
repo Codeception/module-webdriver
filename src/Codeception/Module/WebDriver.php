@@ -335,7 +335,7 @@ class WebDriver extends CodeceptionModule implements
 
     public function _requires()
     {
-        return ['Facebook\WebDriver\Remote\RemoteWebDriver' => '"facebook/webdriver": "^1.0.1"'];
+        return ['Facebook\WebDriver\Remote\RemoteWebDriver' => '"php-webdriver/webdriver": "^1.0.1"'];
     }
 
     /**
@@ -365,8 +365,8 @@ class WebDriver extends CodeceptionModule implements
 
     /**
      * Change capabilities of WebDriver. Should be executed before starting a new browser session.
-     * This method expects a function to be passed which returns array or [WebDriver Desired Capabilities](https://github.com/facebook/php-webdriver/blob/community/lib/Remote/DesiredCapabilities.php) object.
-     * Additional [Chrome options](https://github.com/facebook/php-webdriver/wiki/ChromeOptions) (like adding extensions) can be passed as well.
+     * This method expects a function to be passed which returns array or [WebDriver Desired Capabilities](https://github.com/php-webdriver/php-webdriver/blob/community/lib/Remote/DesiredCapabilities.php) object.
+     * Additional [Chrome options](https://github.com/php-webdriver/php-webdriver/wiki/ChromeOptions) (like adding extensions) can be passed as well.
      *
      * ```php
      * <?php // in helper
@@ -2464,7 +2464,7 @@ class WebDriver extends CodeceptionModule implements
      * ```
      *
      * This runs in the context of the
-     * [RemoteWebDriver class](https://github.com/facebook/php-webdriver/blob/master/lib/remote/RemoteWebDriver.php).
+     * [RemoteWebDriver class](https://github.com/php-webdriver/php-webdriver/blob/master/lib/remote/RemoteWebDriver.php).
      * Try not to use this command on a regular basis.
      * If Codeception lacks a feature you need, please implement it and submit a patch.
      *
@@ -3122,14 +3122,14 @@ class WebDriver extends CodeceptionModule implements
         if (!isset($this->sessionSnapshots[$name])) {
             return false;
         }
-        
+
         foreach ($this->webDriver->manage()->getCookies() as $cookie) {
             if (in_array(trim($cookie['name']), [LocalServer::COVERAGE_COOKIE, LocalServer::COVERAGE_COOKIE_ERROR])) {
                 continue;
             }
             $this->webDriver->manage()->deleteCookieNamed($cookie['name']);
         }
-        
+
         foreach ($this->sessionSnapshots[$name] as $cookie) {
             $this->setCookie($cookie['name'], $cookie['value'], (array)$cookie, false);
         }
