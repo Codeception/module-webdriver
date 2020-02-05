@@ -31,7 +31,7 @@ jobs:
       run: php ./vendor/bin/codecept build
 
     - name: Demo App
-      run: 'php -S 127.0.0.1:8000 -t tests/data/app >/dev/null 2>&1 &'
+      run: php -S 127.0.0.1:8000 -t tests/data/app >/dev/null 2>&1 &
 
     - name: Run test suite
       run: php ./vendor/bin/codecept run
