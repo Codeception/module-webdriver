@@ -3156,7 +3156,7 @@ class WebDriver extends CodeceptionModule implements
      */
     private function cookieDomainMatchesConfigUrl($cookie)
     {
-        if (!array_key_exists('domain', $cookie)) {
+        if (!isset($cookie['domain'])) {
             return true;
         }
 
