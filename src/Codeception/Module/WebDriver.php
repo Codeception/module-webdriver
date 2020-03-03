@@ -2528,30 +2528,25 @@ class WebDriver extends CodeceptionModule implements
      * ``` php
      * <?php
      * # switch to iframe
-     * $I->switchToIFrame("another_frame");
+     * $I->switchToIFrame("iframe[name='another_frame']");
      * # switch to parent page
      * $I->switchToIFrame();
      *
      * ```
      *
-     * @param string|null $name
+     * @param string|null $cssOrXPath
      */
-    public function switchToIFrame($name = null)
+    public function switchToIFrame($cssOrXPath = null)
     {
-        if (is_null($name)) {
+        if (is_null($cssOrXPath)) {
             $this->webDriver->switchTo()->defaultContent();
             return;
         }
-        try {
-            $this->webDriver->switchTo()->frame($name);
-        } catch (\Exception $e) {
-            $this->debug('Iframe was not found by name, locating iframe by CSS or XPath');
-            $frames = $this->_findElements($name);
-            if (!count($frames)) {
-                throw $e;
-            }
-            $this->webDriver->switchTo()->frame($frames[0]);
+        $frames = $this->_findElements($cssOrXPath);
+        if (!count($frames)) {
+            throw $e;
         }
+        $this->webDriver->switchTo()->frame($frames[0]);
     }
 
     /**
