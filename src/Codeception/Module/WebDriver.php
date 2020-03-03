@@ -2521,32 +2521,39 @@ class WebDriver extends CodeceptionModule implements
      *
      * Example:
      * ``` html
-     * <iframe name="another_frame" src="http://example.com">
+     * <iframe name="another_frame" id="fr1" src="http://example.com">
      *
      * ```
      *
      * ``` php
      * <?php
-     * # switch to iframe
-     * $I->switchToIFrame("iframe[name='another_frame']");
+     * # switch to iframe by name
+     * $I->switchToIFrame("another_frame");
+     * # switch to iframe by CSS or XPath
+     * $I->switchToIFrame("#fr1");
      * # switch to parent page
      * $I->switchToIFrame();
      *
      * ```
      *
-     * @param string|null $cssOrXPath
+     * @param string|null $locator (name, CSS or XPath)
      */
-    public function switchToIFrame($cssOrXPath = null)
+    public function switchToIFrame($locator = null)
     {
-        if (is_null($cssOrXPath)) {
+        if (is_null($locator)) {
             $this->webDriver->switchTo()->defaultContent();
             return;
         }
-        $frames = $this->_findElements($cssOrXPath);
-        if (!count($frames)) {
-            throw $e;
+        try {
+            $els = $this->_findElements("iframe[name='$locator']");
+        } catch (\Exception $e) {
+            $this->debug('Iframe was not found by name, locating iframe by CSS or XPath');
+            $els = $this->_findElements($locator);
         }
-        $this->webDriver->switchTo()->frame($frames[0]);
+        if (!count($els)) {
+            throw new ElementNotFound($selector, "Iframe was not found by CSS or XPath");
+        }
+        $this->webDriver->switchTo()->frame($els[0]);
     }
 
     /**
