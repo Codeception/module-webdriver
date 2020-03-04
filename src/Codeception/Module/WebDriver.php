@@ -2521,37 +2521,42 @@ class WebDriver extends CodeceptionModule implements
      *
      * Example:
      * ``` html
-     * <iframe name="another_frame" src="http://example.com">
+     * <iframe name="another_frame" id="fr1" src="http://example.com">
      *
      * ```
      *
      * ``` php
      * <?php
-     * # switch to iframe
+     * # switch to iframe by name
      * $I->switchToIFrame("another_frame");
+     * # switch to iframe by CSS or XPath
+     * $I->switchToIFrame("#fr1");
      * # switch to parent page
      * $I->switchToIFrame();
      *
      * ```
      *
-     * @param string|null $name
+     * @param string|null $locator (name, CSS or XPath)
      */
-    public function switchToIFrame($name = null)
+    public function switchToIFrame($locator = null)
     {
-        if (is_null($name)) {
+        if (is_null($locator)) {
             $this->webDriver->switchTo()->defaultContent();
             return;
         }
         try {
-            $this->webDriver->switchTo()->frame($name);
+            $els = $this->_findElements("iframe[name='$locator']");
         } catch (\Exception $e) {
-            $this->debug('Iframe was not found by name, locating iframe by CSS or XPath');
-            $frames = $this->_findElements($name);
-            if (!count($frames)) {
-                throw $e;
-            }
-            $this->webDriver->switchTo()->frame($frames[0]);
+            $this->debug('Failed to find locator by name: ' . $e->getMessage());
         }
+        if (!is_array($els) || !count($els)) {
+            $this->debug('Iframe was not found by name, locating iframe by CSS or XPath');
+            $els = $this->_findElements($locator);
+        }
+        if (!count($els)) {
+            throw new ElementNotFound($locator, 'Iframe');
+        }
+        $this->webDriver->switchTo()->frame($els[0]);
     }
 
     /**
