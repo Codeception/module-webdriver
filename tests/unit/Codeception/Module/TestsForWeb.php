@@ -11,7 +11,7 @@
 abstract class TestsForWeb extends \Codeception\Test\Unit
 {
     /**
-     * @var \Codeception\Module\PhpBrowser
+     * @var \Codeception\Module\WebDriver
      */
     protected $module;
 
