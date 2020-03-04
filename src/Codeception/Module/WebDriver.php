@@ -2547,11 +2547,14 @@ class WebDriver extends CodeceptionModule implements
         try {
             $els = $this->_findElements("iframe[name='$locator']");
         } catch (\Exception $e) {
+            $this->debug('Failed to find locator by name: ' . $e->getMessage());
+        }
+        if (!is_array($els) || !count($els)) {
             $this->debug('Iframe was not found by name, locating iframe by CSS or XPath');
             $els = $this->_findElements($locator);
         }
         if (!count($els)) {
-            throw new ElementNotFound($selector, "Iframe was not found by CSS or XPath");
+            throw new ElementNotFound($locator, 'Iframe');
         }
         $this->webDriver->switchTo()->frame($els[0]);
     }
