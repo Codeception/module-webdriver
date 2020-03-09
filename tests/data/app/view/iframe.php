@@ -7,7 +7,7 @@
 
 <h1>Iframe test</h1>
 
-<iframe name="content" src="info" />
+<iframe name="content" src="info" title="iframe title" />
 
 </body>
 </html>
