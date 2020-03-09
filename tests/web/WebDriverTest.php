@@ -1097,6 +1097,8 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->see('Lots of valuable data here');
         $this->module->switchToIFrame();
         $this->module->see('Iframe test');
+        $this->module->switchToIFrame('content');
+        $this->module->see('Lots of valuable data here');
 
     }
 
