@@ -2588,7 +2588,7 @@ class WebDriver extends CodeceptionModule implements
         }
 
         if (!isset($els) || !is_array($els) || !count($els)) {
-            $this->debug(ucfirst($tag) . ' was not found by name, locating iframe by CSS or XPath');
+            $this->debug(ucfirst($tag) . ' was not found by name, locating ' . $tag . ' by CSS or XPath');
             $els = $this->_findElements($locator);
         }
 
