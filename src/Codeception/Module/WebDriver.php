@@ -840,12 +840,7 @@ class WebDriver extends CodeceptionModule implements
         if (isset($params['expires'])) { // PhpBrowser compatibility
             $params['expiry'] = $params['expires'];
         }
-        if (!isset($params['domain'])) {
-            $urlParts = parse_url($this->config['url']);
-            if (isset($urlParts['host'])) {
-                $params['domain'] = $urlParts['host'];
-            }
-        }
+
         // #5401 Supply defaults, otherwise chromedriver 2.46 complains.
         $defaults = [
             'path' => '/',
