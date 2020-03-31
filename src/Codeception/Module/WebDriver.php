@@ -2539,6 +2539,7 @@ class WebDriver extends CodeceptionModule implements
             $this->webDriver->switchTo()->defaultContent();
             return;
         }
+        $els = null;
         try {
             $els = $this->_findElements("iframe[name='$locator']");
         } catch (\Exception $e) {
