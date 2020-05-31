@@ -2515,7 +2515,7 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Switch to another frame on the page.
+     * Switch to another iframe on the page.
      *
      * Example:
      * ``` html
@@ -2538,23 +2538,62 @@ class WebDriver extends CodeceptionModule implements
      */
     public function switchToIFrame($locator = null)
     {
-        if (is_null($locator)) {
+        $this->findAndSwitchToFrame($locator, 'iframe');
+    }
+
+    /**
+     * Switch to another frame on the page.
+     *
+     * Example:
+     * ``` html
+     * <frame name="another_frame" id="fr1" src="http://example.com">
+     *
+     * ```
+     *
+     * ``` php
+     * <?php
+     * # switch to frame by name
+     * $I->switchToFrame("another_frame");
+     * # switch to frame by CSS or XPath
+     * $I->switchToFrame("#fr1");
+     * # switch to parent page
+     * $I->switchToFrame();
+     *
+     * ```
+     *
+     * @param string|null $locator (name, CSS or XPath)
+     */
+    public function switchToFrame($locator = null)
+    {
+        $this->findAndSwitchToFrame($locator, 'frame');
+    }
+
+    /**
+     * @param string|null $locator
+     * @param string $tag
+     */
+    private function findAndSwitchToFrame($locator = null, $tag = 'frame')
+    {
+        if ($locator === null) {
             $this->webDriver->switchTo()->defaultContent();
             return;
         }
         $els = null;
         try {
-            $els = $this->_findElements("iframe[name='$locator']");
+            $els = $this->_findElements("{$tag}[name='$locator']");
         } catch (\Exception $e) {
             $this->debug('Failed to find locator by name: ' . $e->getMessage());
         }
-        if (!is_array($els) || !count($els)) {
-            $this->debug('Iframe was not found by name, locating iframe by CSS or XPath');
+
+        if (!isset($els) || !is_array($els) || !count($els)) {
+            $this->debug(ucfirst($tag) . ' was not found by name, locating ' . $tag . ' by CSS or XPath');
             $els = $this->_findElements($locator);
         }
+
         if (!count($els)) {
-            throw new ElementNotFound($locator, 'Iframe');
+            throw new ElementNotFound($locator, ucfirst($tag));
         }
+
         $this->webDriver->switchTo()->frame($els[0]);
     }
 
