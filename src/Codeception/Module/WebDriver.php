@@ -32,6 +32,7 @@ use Facebook\WebDriver\Cookie;
 use Facebook\WebDriver\Exception\InvalidElementStateException;
 use Facebook\WebDriver\Exception\InvalidSelectorException;
 use Facebook\WebDriver\Exception\NoSuchElementException;
+use Facebook\WebDriver\Exception\UnknownErrorException;
 use Facebook\WebDriver\Exception\UnknownServerException;
 use Facebook\WebDriver\Exception\WebDriverCurlException;
 use Facebook\WebDriver\Interactions\WebDriverActions;
@@ -840,12 +841,7 @@ class WebDriver extends CodeceptionModule implements
         if (isset($params['expires'])) { // PhpBrowser compatibility
             $params['expiry'] = $params['expires'];
         }
-        if (!isset($params['domain'])) {
-            $urlParts = parse_url($this->config['url']);
-            if (isset($urlParts['host'])) {
-                $params['domain'] = $urlParts['host'];
-            }
-        }
+
         // #5401 Supply defaults, otherwise chromedriver 2.46 complains.
         $defaults = [
             'path' => '/',
@@ -1537,6 +1533,8 @@ class WebDriver extends CodeceptionModule implements
             $webDriver->quit();
             unset($webDriver);
         } catch (UnknownServerException $e) {
+            // Session already closed so nothing to do
+        } catch (UnknownErrorException $e) {
             // Session already closed so nothing to do
         }
     }
@@ -2580,7 +2578,7 @@ class WebDriver extends CodeceptionModule implements
             $this->webDriver->switchTo()->defaultContent();
             return;
         }
-
+        $els = null;
         try {
             $els = $this->_findElements("{$tag}[name='$locator']");
         } catch (\Exception $e) {
