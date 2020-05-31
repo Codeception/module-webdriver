@@ -2515,7 +2515,7 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Switch to another frame on the page.
+     * Switch to another iframe on the page.
      *
      * Example:
      * ``` html
