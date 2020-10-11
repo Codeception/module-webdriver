@@ -3252,17 +3252,16 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Opens a new browser tab (wherever it is possible) and switches to it.
+     * Opens a new browser tab and switches to it.
      *
      * ```php
      * <?php
      * $I->openNewTab();
      * ```
-     * Tab is opened by using `window.open` javascript in a browser.
-     * Please note, that adblock can restrict creating such tabs.
-     *
-     * Can't be used with PhantomJS
-     *
+     * The tab is opened with JavaScript's `window.open()`, which means:
+     * * Some adblockers might restrict it.
+     * * The sessionStorage is copied to the new tab (contrary to a tab that was manually opened by the user)
+     * * It is not possible in PhantomJS.
      */
     public function openNewTab()
     {
