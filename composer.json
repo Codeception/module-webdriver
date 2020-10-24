@@ -23,9 +23,6 @@
         "codeception/codeception": "^4.0",
         "php-webdriver/webdriver": "^1.6.0"
     },
-    "require-dev": {
-        "codeception/util-robohelpers": "dev-master"
-    },
     "suggest": {
         "codeception/phpbuiltinserver": "Start and stop PHP built-in web server for your tests"
     },
