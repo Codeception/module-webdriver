@@ -113,6 +113,8 @@ use Facebook\WebDriver\WebDriverSelect;
  *          url: 'http://localhost/'
  *          browser: firefox
  *          path: ''
+ *          capabilities:
+ *              acceptInsecureCerts: true # allow self-signed certificates
  * ```
  *
  * ### PhantomJS
