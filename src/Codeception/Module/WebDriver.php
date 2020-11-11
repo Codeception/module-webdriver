@@ -228,6 +228,27 @@ use Facebook\WebDriver\WebDriverSelect;
  *                  firefox_profile: '~/firefox-profiles/codeception-profile.zip.b64'
  * ```
  *
+ * ## Loading Parts from other Modules
+ *
+ * While all Codeception modules are designed to work stand-alone, it's still possible to load *several* modules at once. To use e.g. the [Asserts module](https://codeception.com/docs/modules/Asserts) in your acceptance tests, just load it like this in your `acceptance.suite.yml`:
+ *
+ * ```yaml
+ * modules:
+ *     enabled:
+ *         - WebDriver
+ *         - Asserts
+ * ```
+ *
+ * However, when loading a framework module (e.g. [Symfony](https://codeception.com/docs/modules/Symfony)) like this, it would lead to a conflict: When you call `$I->amOnPage()`, Codeception wouldn't know if you want to access the page using WebDriver's `amOnPage()`, or Symfony's `amOnPage()`. That's why possibly conflicting modules are separated into "parts". Here's how to load just the "services" part from e.g. Symfony:
+ * ```yaml
+ * modules:
+ *     enabled:
+ *         - WebDriver
+ *         - Symfony:
+ *             part: services
+ * ```
+ * To find out which parts each module has, look at the "Parts" header on the module's page.
+ *
  * ## Usage
  *
  * ### Locating Elements
