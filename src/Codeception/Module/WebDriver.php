@@ -123,26 +123,6 @@ use Facebook\WebDriver\WebDriverSelect;
  *              acceptInsecureCerts: true # allow self-signed certificates
  * ```
  *
- * ### PhantomJS
- *
- * PhantomJS is a [headless browser](https://en.wikipedia.org/wiki/Headless_browser) alternative to Selenium Server that implements
- * [the WebDriver protocol](https://code.google.com/p/selenium/wiki/JsonWireProtocol).
- * It allows you to run Selenium tests on a server without a GUI installed.
- *
- * 1. Download [PhantomJS](http://phantomjs.org/download.html)
- * 2. Run PhantomJS in WebDriver mode: `phantomjs --webdriver=4444`
- * 3. Configure this module (in `acceptance.suite.yml`) by setting url and `phantomjs` as browser:
- *
- * ```yaml
- *     modules:
- *        enabled:
- *           - WebDriver:
- *              url: 'http://localhost/'
- *              browser: phantomjs
- * ```
- *
- * Since PhantomJS doesn't give you any visual feedback, it's probably a good idea to install [Codeception\Extension\Recorder](http://codeception.com/extensions#CodeceptionExtensionRecorder) which gives you screenshots of how PhantomJS "sees" your pages.
- *
  * ### Headless Selenium in Docker
  *
  * Docker can ship Selenium Server with all its dependencies and browsers inside a single container.
@@ -3306,7 +3286,6 @@ class WebDriver extends CodeceptionModule implements
      * The tab is opened with JavaScript's `window.open()`, which means:
      * * Some adblockers might restrict it.
      * * The sessionStorage is copied to the new tab (contrary to a tab that was manually opened by the user)
-     * * It is not possible in PhantomJS.
      */
     public function openNewTab()
     {
@@ -3321,8 +3300,6 @@ class WebDriver extends CodeceptionModule implements
      * <?php
      * $I->closeTab();
      * ```
-     *
-     * Can't be used with PhantomJS
      */
     public function closeTab()
     {
@@ -3342,9 +3319,6 @@ class WebDriver extends CodeceptionModule implements
      * // switch to 2nd next tab
      * $I->switchToNextTab(2);
      * ```
-     *
-     * Can't be used with PhantomJS
-     *
      * @param int $offset 1
      */
     public function switchToNextTab($offset = 1)
@@ -3364,9 +3338,6 @@ class WebDriver extends CodeceptionModule implements
      * // switch to 2nd previous tab
      * $I->switchToPreviousTab(2);
      * ```
-     *
-     * Can't be used with PhantomJS
-     *
      * @param int $offset 1
      */
     public function switchToPreviousTab($offset = 1)
