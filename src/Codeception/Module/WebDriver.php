@@ -49,18 +49,24 @@ use Facebook\WebDriver\WebDriverKeys;
 use Facebook\WebDriver\WebDriverSelect;
 
 /**
- * New generation Selenium WebDriver module.
+ * Run tests in real browsers using the W3C [WebDriver protocol](https://www.w3.org/TR/webdriver/).
  *
  * ## Local Testing
+ *
+ * ### Browsers: Chrome and/or Firefox
+ *
+ * First, you need to install the browser itself: Chrome and/or Firefox.
+ * * To run tests in Chrome/Chromium, you need to install [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started).
+ * * To use Firefox, install [GeckoDriver](https://github.com/mozilla/geckodriver).
+ * If you want to use both, consider setting up a dedicated [Codeception environment](https://codeception.com/docs/07-AdvancedUsage#Environments) for each.
  *
  * ### Selenium
  *
  * To run Selenium Server you need [Java](https://www.java.com/) as well as Chrome or Firefox browser installed.
  *
  * 1. Download [Selenium Standalone Server](http://docs.seleniumhq.org/download/)
- * 2. To use Chrome, install [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started). To use Firefox, install [GeckoDriver](https://github.com/mozilla/geckodriver).
- * 3. Launch the Selenium Server: `java -jar selenium-server-standalone-3.xx.xxx.jar`. To locate Chromedriver binary use `-Dwebdriver.chrome.driver=./chromedriver` option. For Geckodriver use `-Dwebdriver.gecko.driver=./geckodriver`.
- * 4. Configure this module (in `acceptance.suite.yml`) by setting `url` and `browser`:
+ * 2. Launch the Selenium Server: `java -jar selenium-server-standalone-3.xx.xxx.jar`. To locate Chromedriver binary use `-Dwebdriver.chrome.driver=./chromedriver` option. For Geckodriver use `-Dwebdriver.gecko.driver=./geckodriver`.
+ * 3. Configure this module (in `acceptance.suite.yml`) by setting `url` and `browser`:
  *
  * ```yaml
  *     modules:
