@@ -2935,9 +2935,9 @@ class WebDriver extends CodeceptionModule implements
 
     /**
      * Presses the given key on the given element.
-     * To specify a character and modifier (e.g. ctrl, alt, shift, meta), pass an array for $char with
+     * To specify a character and modifier (e.g. <kbd>Ctrl</kbd>, Alt, Shift, Meta), pass an array for `$char` with
      * the modifier as the first element and the character as the second.
-     * For special keys use key constants from WebDriverKeys class.
+     * For special keys, use the constants from [`Facebook\WebDriver\WebDriverKeys`](https://github.com/php-webdriver/php-webdriver/blob/main/lib/WebDriverKeys.php).
      *
      * ``` php
      * <?php
