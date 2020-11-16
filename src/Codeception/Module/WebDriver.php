@@ -84,7 +84,7 @@ use Facebook\WebDriver\WebDriverSelect;
  *
  * ### ChromeDriver
  *
- * To run tests in Chrome browser you may connect to ChromeDriver directly, without using Selenium Server.
+ * To run tests in Chrome/Chromium you may connect to ChromeDriver directly, without using Selenium Server.
  *
  * 1. Install [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started).
  * 2. Launch ChromeDriver: `chromedriver --url-base=/wd/hub`
@@ -104,6 +104,24 @@ use Facebook\WebDriver\WebDriverSelect;
  *
  * Additional [Chrome options](https://sites.google.com/a/chromium.org/chromedriver/capabilities) can be set in `goog:chromeOptions` capabilities. Note that Selenium 3.8 renamed this capability from `chromeOptions` to `goog:chromeOptions`.
  *
+ * ### GeckoDriver
+ * 
+ * To run tests in Firefox you may connect to GeckoDriver directly, without using Selenium Server.
+ *
+ * 1. Install [GeckoDriver](https://github.com/mozilla/geckodriver).
+ * 2. Launch GeckoDriver: `geckodriver`
+ * 3. Configure this module:
+ *
+ * ```yaml
+ * modules:
+ *    enabled:
+ *       - WebDriver:
+ *          url: 'http://localhost/'
+ *          browser: firefox
+ *          path: ''
+ *          capabilities:
+ *              acceptInsecureCerts: true # allow self-signed certificates
+ * ```
  *
  * ### PhantomJS
  *
