@@ -1504,7 +1504,7 @@ class WebDriver extends CodeceptionModule implements
             $this->initialWindowSize();
         } catch (WebDriverCurlException $e) {
             codecept_debug('Curl error: ' . $e->getMessage());
-            throw new ConnectionException("Can't connect to Webdriver at {$this->wdHost}. Please make sure that Selenium Server or PhantomJS is running.");
+            throw new ConnectionException("Can't connect to WebDriver at {$this->wdHost}. Make sure that ChromeDriver, GeckoDriver or Selenium Server is running.");
         }
     }
 
