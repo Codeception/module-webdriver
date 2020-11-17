@@ -135,6 +135,21 @@ class WebDriverTest extends TestsForBrowsers
         @unlink(\Codeception\Configuration::outputDir().'testshot.png');
     }
 
+    public function testElementScreenshot()
+    {
+        $this->module->amOnPage('/');
+        @unlink(\Codeception\Configuration::outputDir().'testelementshot.png');
+        $testName="debugTestElement";
+
+        $this->module->makeElementScreenshot('#area4', $testName);
+        $this->assertFileExists(\Codeception\Configuration::outputDir().'debug/'.$testName.'.png');
+        @unlink(\Codeception\Configuration::outputDir().'debug/'.$testName.'.png');
+
+        $this->module->_saveElementScreenshot('#area4', \Codeception\Configuration::outputDir().'testshot.png');
+        $this->assertFileExists(\Codeception\Configuration::outputDir().'testshot.png');
+        @unlink(\Codeception\Configuration::outputDir().'testelementshot.png');
+    }
+
     public function testSnapshot()
     {
         $this->module->amOnPage('/');
