@@ -74,7 +74,8 @@ use Facebook\WebDriver\WebDriverSelect;
  *          port: 9515
  *          browser: chrome
  *          capabilities:
- *              chromeOptions: # additional chrome options
+ *              chromeOptions:
+ *                  args: ["--headless", "--disable-gpu"] # Run Chrome in headless mode
  *                  prefs:
  *                      download.default_directory: "..."
  * ```
@@ -96,6 +97,10 @@ use Facebook\WebDriver\WebDriverSelect;
  *          path: ''
  *          capabilities:
  *              acceptInsecureCerts: true # allow self-signed certificates
+ *              moz:firefoxOptions:
+ *                  args: ["-headless"] # Run Firefox in headless mode
+ *                  prefs:
+ *                      intl.accept_languages: "de-AT" # Set HTTP-Header `Accept-Language: de-AT` for requests
  * ```
  * See here for [Firefox capabilities](https://developer.mozilla.org/en-US/docs/Web/WebDriver/Capabilities#List_of_capabilities)
  *
