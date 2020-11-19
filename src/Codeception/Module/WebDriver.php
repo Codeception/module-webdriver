@@ -293,6 +293,20 @@ use Facebook\WebDriver\WebDriverSelect;
  * until it finally tries to find the form by XPath).
  * If speed is a concern, it's recommended you stick with explicitly specifying the locator type via the array syntax.
  *
+ * ### 
+ *
+ * You can switch between browsers inside your code by injecting `\Codeception\Scenario` into your test like this:
+ * ```php
+ * use Codeception\Scenario
+ * public function myTest(AcceptanceTester $I, Scenario $scenario)
+ * {
+ *     if ('firefox' === $scenario->current('browser')) {
+ *         // ... 
+ *     }
+ * }
+ * ```
+ * See [Advanced Usage](https://codeception.com/docs/07-AdvancedUsage#Current-values) for more information on `$scenario`.
+ *
  * ## Public Properties
  *
  * * `webDriver` - instance of `\Facebook\WebDriver\Remote\RemoteWebDriver`. Can be accessed from Helper classes for complex WebDriver interactions.
