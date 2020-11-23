@@ -305,7 +305,7 @@ use Facebook\WebDriver\WebDriverSelect;
  *     }
  * }
  * ```
- * See [Advanced Usage](https://codeception.com/docs/07-AdvancedUsage#Get-Scenario-Metadata) for more information on `$scenario`.
+ * See [Get Scenario Metadata](https://codeception.com/docs/07-AdvancedUsage#Get-Scenario-Metadata) for more information on `$scenario`.
  *
  * ## Public Properties
  *
