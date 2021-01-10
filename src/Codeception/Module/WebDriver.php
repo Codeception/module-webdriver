@@ -200,7 +200,7 @@ use Facebook\WebDriver\WebDriverSelect;
  *
  * ## Configuration
  *
- * * `url` *required* - Starting URL for your app.
+ * * `url` *required* - Base URL for your app (amOnPage opens URLs relative to this setting).
  * * `browser` *required* - Browser to launch.
  * * `host` - Selenium server host (127.0.0.1 by default).
  * * `port` - Selenium server port (4444 by default).
