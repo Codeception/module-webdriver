@@ -391,7 +391,7 @@ class WebDriver extends CodeceptionModule implements
 
     /**
      * Change capabilities of WebDriver. Should be executed before starting a new browser session.
-     * This method expects a function to be passed which returns array or [WebDriver Desired Capabilities](https://github.com/php-webdriver/php-webdriver/blob/community/lib/Remote/DesiredCapabilities.php) object.
+     * This method expects a function to be passed which returns array or [WebDriver Desired Capabilities](https://github.com/php-webdriver/php-webdriver/blob/main/lib/Remote/DesiredCapabilities.php) object.
      * Additional [Chrome options](https://github.com/php-webdriver/php-webdriver/wiki/ChromeOptions) (like adding extensions) can be passed as well.
      *
      * ```php
