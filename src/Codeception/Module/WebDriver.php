@@ -215,6 +215,8 @@ use Facebook\WebDriver\WebDriverSelect;
  * * `pageload_timeout` - amount of time to wait for a page load to complete before throwing an error (default 0 seconds).
  * * `http_proxy` - sets http proxy server url for testing a remote server.
  * * `http_proxy_port` - sets http proxy server port
+ * * `ssl_proxy` - sets ssl(https) proxy server url for testing a remote server.
+ * * `ssl_proxy_port` - sets ssl(https) proxy server port
  * * `debug_log_entries` - how many selenium entries to print with `debugWebDriverLogs` or on fail (0 by default).
  * * `log_js_errors` - Set to true to include possible JavaScript to HTML report, or set to false (default) to deactivate.
  *
