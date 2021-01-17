@@ -741,6 +741,20 @@ class WebDriver extends CodeceptionModule implements
         }
     }
 
+    public function _saveElementScreenshot($selector, $filename)
+    {
+        if (!isset($this->webDriver)) {
+            $this->debug('WebDriver::_saveElementScreenshot method has been called when webDriver is not set');
+            return;
+        }
+        try {
+            $this->matchFirstOrFail($this->webDriver, $selector)->takeElementScreenshot($filename);
+        } catch (\Exception $e) {
+            $this->debug('Unable to retrieve element screenshot from Selenium : ' . $e->getMessage());
+            return;
+        }
+    }
+
     public function _findElements($locator)
     {
         return $this->match($this->webDriver, $locator);
@@ -788,6 +802,34 @@ class WebDriver extends CodeceptionModule implements
         }
         $screenName = $debugDir . DIRECTORY_SEPARATOR . $name . '.png';
         $this->_saveScreenshot($screenName);
+        $this->debugSection('Screenshot Saved', "file://$screenName");
+    }
+
+    /**
+     * Takes a screenshot of an element of the current window and saves it to `tests/_output/debug`.
+     *
+     * ``` php
+     * <?php
+     * $I->amOnPage('/user/edit');
+     * $I->makeElementScreenshot('#dialog', 'edit_page');
+     * // saved to: tests/_output/debug/edit_page.png
+     * $I->makeElementScreenshot('#dialog');
+     * // saved to: tests/_output/debug/2017-05-26_14-24-11_4b3403665fea6.png
+     * ```
+     *
+     * @param $name
+     */
+    public function makeElementScreenshot($selector, $name = null)
+    {
+        if (empty($name)) {
+            $name = uniqid(date("Y-m-d_H-i-s_"));
+        }
+        $debugDir = codecept_log_dir() . 'debug';
+        if (!is_dir($debugDir)) {
+            mkdir($debugDir, 0777);
+        }
+        $screenName = $debugDir . DIRECTORY_SEPARATOR . $name . '.png';
+        $this->_saveElementScreenshot($selector, $screenName);
         $this->debugSection('Screenshot Saved', "file://$screenName");
     }
 
