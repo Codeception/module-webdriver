@@ -299,6 +299,20 @@ use Facebook\WebDriver\WebDriverSelect;
  * until it finally tries to find the form by XPath).
  * If speed is a concern, it's recommended you stick with explicitly specifying the locator type via the array syntax.
  *
+ * ### Get Scenario Metadata
+ *
+ * You can inject `\Codeception\Scenario` into your test to get information about the current configuration:
+ * ```php
+ * use Codeception\Scenario
+ * public function myTest(AcceptanceTester $I, Scenario $scenario)
+ * {
+ *     if ('firefox' === $scenario->current('browser')) {
+ *         // ...
+ *     }
+ * }
+ * ```
+ * See [Get Scenario Metadata](https://codeception.com/docs/07-AdvancedUsage#Get-Scenario-Metadata) for more information on `$scenario`.
+ *
  * ## Public Properties
  *
  * * `webDriver` - instance of `\Facebook\WebDriver\Remote\RemoteWebDriver`. Can be accessed from Helper classes for complex WebDriver interactions.
