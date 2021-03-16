@@ -301,7 +301,7 @@ use Facebook\WebDriver\WebDriverSelect;
  * public function myTest(AcceptanceTester $I, Scenario $scenario)
  * {
  *     if ('firefox' === $scenario->current('browser')) {
- *         // ... 
+ *         $this->getModule('WebDriver')->_restart(['browser' => 'chrome']); // See https://codeception.com/docs/modules/WebDriver#_restart
  *     }
  * }
  * ```
