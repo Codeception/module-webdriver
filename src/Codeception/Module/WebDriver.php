@@ -53,13 +53,30 @@ use Facebook\WebDriver\WebDriverSelect;
  *
  * ## Local Testing in Chrome and/or Firefox
  *
- * To run tests in a real browser you need:
- * * The browser itself: Chrome/Chromium and/or Firefox
- * * The appropriate driver:
- *     * [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started) for Chrome/Chromium
- *     * [GeckoDriver](https://github.com/mozilla/geckodriver) for Firefox
- *   If you want to use both Chrome and Firefox, consider setting up a dedicated [Codeception environment](https://codeception.com/docs/07-AdvancedUsage#Environments) for each.
- * * Optional: Selenium Standalone Server (see below) 
+ * ### Installing ChromeDriver and geckodriver
+ * On all systems, you can use `dbrekelmans/browser-driver-installer` to install ChromeDriver and geckodriver locally:
+ * ```bash
+ * composer require --dev dbrekelmans/bdi
+ * vendor/bin/bdi detect drivers
+ * ```
+ * Alternatively, you can use the package manager of your operating system:
+ * On Ubuntu, run:
+ * ```bash
+ * apt-get install chromium-chromedriver firefox-geckodriver
+ * ```
+ * On Mac, using [Homebrew](https://brew.sh):
+ * ```bash
+ * brew install chromedriver geckodriver
+ * ```
+ * On Windows, using [chocolatey](https://chocolatey.org):
+ * ```bash
+ * choco install chromedriver selenium-gecko-driver
+ * ```
+ * Or download them manually:
+ * * [ChromeDriver](https://sites.google.com/a/chromium.org/chromedriver/getting-started) for Chrome/Chromium
+ * * [GeckoDriver](https://github.com/mozilla/geckodriver) for Firefox
+ *
+ * If you want to use both Chrome and Firefox, consider setting up a dedicated [Codeception environment](https://codeception.com/docs/07-AdvancedUsage#Environments) for each.
  *
  * ### ChromeDriver
  *
