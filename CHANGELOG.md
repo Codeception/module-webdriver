@@ -1,3 +1,6 @@
+## [1.2.2](https://github.com/Codeception/module-webdriver/releases/tag/1.2.2)
+added more options
+
 ## [1.2.1](https://github.com/Codeception/module-webdriver/releases/tag/1.2.1)
 Merge pull request [#65](https://github.com/Codeception/module-webdriver/pull/65) from ThomasLandauer/patch-1
 Added Scenario Metadata
