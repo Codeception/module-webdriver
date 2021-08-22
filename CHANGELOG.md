@@ -1,3 +1,9 @@
+## [1.3.0](https://github.com/Codeception/module-webdriver/releases/tag/1.2.č)
+Add new option webdriver_proxy to tunnel requests to the remote WebDriver erver
+
+## [1.2.2](https://github.com/Codeception/module-webdriver/releases/tag/1.2.č)
+Documentation update
+
 ## [1.2.1](https://github.com/Codeception/module-webdriver/releases/tag/1.2.1)
 Merge pull request [#65](https://github.com/Codeception/module-webdriver/pull/65) from ThomasLandauer/patch-1
 Added Scenario Metadata
