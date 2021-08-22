@@ -263,6 +263,8 @@ use Facebook\WebDriver\WebDriverSelect;
  * * `ssl_proxy_port` - sets ssl(https) proxy server port
  * * `debug_log_entries` - how many selenium entries to print with `debugWebDriverLogs` or on fail (0 by default).
  * * `log_js_errors` - Set to true to include possible JavaScript to HTML report, or set to false (default) to deactivate.
+ * * `webdriver_proxy` - sets http proxy to tunnel requests to the remote Selenium WebDriver through
+ * * `webdriver_proxy_port` - sets http proxy server port to tunnel requests to the remote Selenium WebDriver through
  *
  * Example (`acceptance.suite.yml`)
  *
@@ -394,7 +396,9 @@ class WebDriver extends CodeceptionModule implements
         'ssl_proxy'          => null,
         'ssl_proxy_port'     => null,
         'debug_log_entries'  => 0,
-        'log_js_errors'      => false
+        'log_js_errors'      => false,
+        'webdriver_proxy' => null,
+        'webdriver_proxy_port' => null,
     ];
 
     protected $wdHost;
@@ -404,10 +408,8 @@ class WebDriver extends CodeceptionModule implements
     protected $test;
     protected $sessions = [];
     protected $sessionSnapshots = [];
-    protected $httpProxy;
-    protected $httpProxyPort;
-    protected $sslProxy;
-    protected $sslProxyPort;
+    protected $webdriverProxy;
+    protected $webdriverProxyPort;
 
     /**
      * @var RemoteWebDriver
@@ -446,6 +448,8 @@ class WebDriver extends CodeceptionModule implements
         }
         $this->connectionTimeoutInMs = $this->config['connection_timeout'] * 1000;
         $this->requestTimeoutInMs = $this->config['request_timeout'] * 1000;
+        $this->webdriverProxy = $this->config['webdriver_proxy'];
+        $this->webdriverProxyPort = $this->config['webdriver_proxy_port'];
         $this->loadFirefoxProfile();
     }
 
@@ -1596,8 +1600,8 @@ class WebDriver extends CodeceptionModule implements
                 $this->capabilities,
                 $this->connectionTimeoutInMs,
                 $this->requestTimeoutInMs,
-                $this->httpProxy,
-                $this->httpProxyPort
+                $this->webdriverProxy,
+                $this->webdriverProxyPort
             );
             if (!is_null($this->config['pageload_timeout'])) {
                 $this->webDriver->manage()->timeouts()->pageLoadTimeout($this->config['pageload_timeout']);
