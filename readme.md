@@ -1,6 +1,7 @@
 # WebDriver module for Codeception
 
-[![WebDriver Tests](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml)
+[![WebDriver Chrome](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-chrome.yml) [![WebDriver Firefox](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-firefox.yml)
+
 
 ## Installation
 
