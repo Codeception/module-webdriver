@@ -1,6 +1,6 @@
 # WebDriver module for Codeception
 
-[![Build Status](https://travis-ci.org/Codeception/module-webdriver.svg?branch=master)](https://travis-ci.org/Codeception/module-webdriver)
+[![WebDriver Tests](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml)
 
 ## Installation
 
