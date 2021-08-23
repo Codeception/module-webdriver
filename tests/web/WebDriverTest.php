@@ -896,48 +896,6 @@ class WebDriverTest extends TestsForBrowsers
     /**
      * @group window
      */
-    public function testJSErrorLoggingPositive()
-    {
-        // arrange
-        $this->module->_setConfig(['log_js_errors' => true]);
-        $cept = new \Codeception\Test\Cept('foo', 'bar');
-
-        // act
-        $this->module->amOnPage('/jserroronload');
-        $this->module->_failed($cept, 'anyFailMessage');
-
-        // assert
-        /* @var $steps Step[]  */
-        $steps = $cept->getScenario()->getSteps();
-        $this->assertGreaterThan(0, count($steps));
-
-        $lastStep = end($steps);
-
-        $this->assertStringContainsString(
-            "TypeError",
-            $lastStep->getHtml()
-        );
-    }
-
-    public function testJSErrorLoggingNegative()
-    {
-        // arrange
-        $this->module->_setConfig(['log_js_errors' => false]);
-        $cept = new \Codeception\Test\Cept('foo', 'bar');
-
-        // act
-        $this->module->amOnPage('/jserroronload');
-        $this->module->_failed($cept, 'anyFailMessage');
-
-        // assert
-        /* @var $steps Step[]  */
-        $steps = $cept->getScenario()->getSteps();
-        $this->assertCount(0, $steps);
-    }
-
-    /**
-     * @group window
-     */
     public function testMoveMouseOver()
     {
         $this->module->amOnPage('/form/click');

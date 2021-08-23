@@ -1408,18 +1408,6 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
     }
 
     /**
-     * @Issue https://github.com/Codeception/Codeception/issues/1535
-     */
-    public function testCheckingOptionsWithComplexNames()
-    {
-        $this->module->amOnPage('/form/bug1535');
-        $this->module->checkOption('#bmessage-topicslinks input[value="4"]');
-        $this->module->click('Submit');
-        $data = data::get('form');
-        $this->assertContains(4, $data['BMessage']['topicsLinks']);
-    }
-
-    /**
      * @Issue https://github.com/Codeception/Codeception/issues/1585
      * @Issue https://github.com/Codeception/Codeception/issues/1602
      */

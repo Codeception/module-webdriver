@@ -1,4 +1,4 @@
-name: Chrome Tests
+name: Chrome Headless Tests
 
 on:
   push:
@@ -36,7 +36,7 @@ jobs:
       run: php -S 127.0.0.1:8000 -t tests/data/app >/dev/null 2>&1 &
       
     - name: Tests
-      run: php ./vendor/bin/codecept run
+      run: php ./vendor/bin/codecept run --env headless
 
     # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
     # Docs: https://getcomposer.org/doc/articles/scripts.md

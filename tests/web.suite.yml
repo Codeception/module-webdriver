@@ -6,7 +6,7 @@ modules:
       url: http://localhost:8000
       browser: chrome
       window_size: 1200x768
-      restart: true # Use a new browser window for each test (to isolate test cases from each other)
+      restart: false # Use a new browser window for each test (to isolate test cases from each other)
 env:
   firefox:
     modules:
@@ -14,6 +14,7 @@ env:
         WebDriver:
           browser: firefox
           port: 4444
+          restart: false
   fast:
     modules:
       config:
