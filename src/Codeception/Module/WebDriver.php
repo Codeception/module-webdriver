@@ -1852,7 +1852,7 @@ class WebDriver extends CodeceptionModule implements
         $keys = str_split($text);
         foreach ($keys as $key) {
             sleep($delay);
-            $webDriver->getKeyboard()->pressKey($key);
+            $this->webDriver->getKeyboard()->pressKey($key);
         }
         sleep($delay);
     }
