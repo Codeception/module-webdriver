@@ -1826,6 +1826,37 @@ class WebDriver extends CodeceptionModule implements
         $el->clear();
     }
 
+    /**
+     * Type in characters on active element.
+     * With a second parameter you can specify delay between key presses. 
+     * 
+     * ```php
+     * <?php
+     * // activate input element
+     * $I->click('#input');
+     * 
+     * // type text in active element
+     * $I->type('Hello world');
+     * 
+     * // type text with a 1sec delay between chars
+     * $I->type('Hello World', 1);
+     * ```
+     * 
+     * This might be useful when you an input reacts to typing and you need to slow it down to emulate human behavior.
+     * For instance, this is how Credit Card fields can be filled in.
+     * 
+     * @param $text
+     * @param $delay [sec]
+     */
+    public function type($text, $delay = 0) {
+        $keys = str_split($text);
+        foreach ($keys as $key) {
+            sleep($delay);
+            $webDriver->getKeyboard()->pressKey($key);
+        }
+        sleep($delay);
+    }
+
     public function attachFile($field, $filename)
     {
         $el = $this->findField($field);
@@ -3398,6 +3429,20 @@ class WebDriver extends CodeceptionModule implements
         $this->executeJS("window.open('about:blank','_blank');");
         $this->switchToNextTab();
     }
+
+    /**
+     * Checks current number of opened tabs
+     *
+     * ```php
+     * <?php
+     * $I->seeNumberOfTabs(2);
+     * ```
+     * @param $number number of tabs
+     */
+    public function seeNumberOfTabs($number)
+    {
+        $this->assertEquals(count($this->webDriver->getWindowHandles()), $number);
+    }    
 
     /**
      * Closes current browser tab and switches to previous active tab.
