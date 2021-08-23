@@ -1,7 +1,8 @@
 # WebDriver module for Codeception
 
-[![Chrome Tests](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-chrome.yml) [![Chrome Headless Tests](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-chrome.yml)  [![Firefox Tests](https://github.com/Codeception/module-webdriver/actions/workflows/php.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-firefox.yml)
-
+[![Chrome Tests](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-chrome.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-chrome.yml)
+[![Chrome Headless Tests](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-chrome-headless.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-chrome-headless.yml) 
+[![Firefox Tests](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-firefox.yml/badge.svg)](https://github.com/Codeception/module-webdriver/actions/workflows/webdriver-firefox.yml)
 
 ## Installation
 

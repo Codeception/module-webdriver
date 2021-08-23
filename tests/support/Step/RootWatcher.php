@@ -1,7 +1,7 @@
 <?php
 namespace Step;
 
-class RootWatcher extends \AcceptanceTester
+class RootWatcher extends \WebGuy
 {
     public function seeInRootPage($message)
     {

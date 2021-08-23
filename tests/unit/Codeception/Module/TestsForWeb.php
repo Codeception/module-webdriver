@@ -1270,6 +1270,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /*
      * @env chrome
+     * 
      * https://github.com/Codeception/Codeception/issues/1274
      */
     public function testSubmitFormWithDocRelativePathForAction()
