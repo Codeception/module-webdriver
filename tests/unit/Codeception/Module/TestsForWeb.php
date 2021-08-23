@@ -1268,20 +1268,6 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('bob', $form['username']);
     }
 
-    /*
-     * @env chrome
-     * 
-     * https://github.com/Codeception/Codeception/issues/1274
-     */
-    public function testSubmitFormWithDocRelativePathForAction()
-    {
-        $this->module->amOnPage('/form/example12');
-        $this->module->submitForm('form', array(
-            'test' => 'value'
-        ));
-        $this->module->seeCurrentUrlEquals('/form/example11');
-    }
-
     /**
      * @env chrome
      */    
