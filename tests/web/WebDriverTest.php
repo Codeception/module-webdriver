@@ -365,6 +365,16 @@ class WebDriverTest extends TestsForBrowsers
         $this->assertEquals('eat code', $form['description']);
     }
 
+    public function testTypeOnTextarea()
+    {
+        $this->module->amOnPage('/form/textarea');
+        $this->module->fillField('form #description', '');
+        $this->module->type('Hello world');
+        $this->module->click('Submit');
+        $form = data::get('form');
+        $this->assertEquals('Hello world', $form['description']);
+    }
+
     public function testAppendFieldTextareaFails()
     {
         $this->shouldFail();
@@ -379,6 +389,16 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->click('Submit');
         $form = data::get('form');
         $this->assertEquals('OLD_VALUE code', $form['name']);
+    }
+
+    public function testTypeOnTextField()
+    {
+        $this->module->amOnPage('/form/field');
+        $this->module->fillField('form #name', '');
+        $this->module->type('Hello world');
+        $this->module->click('Submit');
+        $form = data::get('form');
+        $this->assertEquals('Hello world', $form['name']);
     }
 
     public function testAppendFieldTextFails()
