@@ -161,6 +161,9 @@ class WebDriverTest extends TestsForBrowsers
         @unlink(\Codeception\Configuration::outputDir().'debug/'.$testName.'.html');
     }
 
+    /**
+     * @env chrome
+     */
     public function testSubmitForm()
     {
         $this->module->amOnPage('/form/complex');
@@ -177,6 +180,10 @@ class WebDriverTest extends TestsForBrowsers
         $this->assertEquals('agree', $form['terms']);
         $this->assertEquals('child', $form['age']);
     }
+
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormWithNumbers()
     {
         $this->module->amOnPage('/form/complex');
@@ -195,6 +202,7 @@ class WebDriverTest extends TestsForBrowsers
     }
 
     /**
+     * @env chrome
      * @dataProvider strictSelectorProvider
      */
     public function testSubmitFormWithButtonAsStrictSelector(array $selector)
@@ -229,6 +237,7 @@ class WebDriverTest extends TestsForBrowsers
     }
 
     /**
+     * @env chrome
      * @dataProvider webDriverByProvider
      */
     public function testSubmitFormWithButtonAsWebDriverBy(WebDriverBy $selector)
@@ -301,6 +310,9 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->seeCurrentUrlEquals('/info');
     }
 
+    /**
+     * @env chrome
+     */
     public function testKeys()
     {
         $this->module->amOnPage('/form/field');
@@ -440,7 +452,11 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->appendField('form input[name=terms]', 'Get Off123');
     }
 
-    // Issue https://github.com/Codeception/Codeception/pull/875
+    // 
+    /**
+     * @Issue https://github.com/Codeception/Codeception/pull/875
+     * @env chrome
+     */
     public function testFillPasswordOnFormSubmit()
     {
         $this->module->amOnPage('/form/complex');
@@ -451,6 +467,9 @@ class WebDriverTest extends TestsForBrowsers
         $this->assertEquals('123456', $form['password']);
     }
 
+    /**
+     * @env chrome
+     */
     public function testEmptyFormSubmit()
     {
         $this->shouldFail();
@@ -766,6 +785,9 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->seeInField('#select2', $option_value);
     }
 
+    /**
+     * @env chrome
+     */
     public function testAppendFieldDiv()
     {
         $this->notForPhantomJS();
@@ -895,6 +917,7 @@ class WebDriverTest extends TestsForBrowsers
 
     /**
      * @group window
+     * @env chrome
      */
     public function testMoveMouseOver()
     {
@@ -919,6 +942,7 @@ class WebDriverTest extends TestsForBrowsers
 
     /**
      * @group window
+     * @env chrome
      */
     public function testLeftClick()
     {
@@ -942,6 +966,7 @@ class WebDriverTest extends TestsForBrowsers
 
     /**
      * @group window
+     * @env chrome
      */
     public function testRightClick()
     {
@@ -1076,6 +1101,7 @@ class WebDriverTest extends TestsForBrowsers
     }
 
     /**
+     * @env chrome
      * @group window
      */
     public function testGrabPageSourceWhenNotOnPage()

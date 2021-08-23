@@ -992,6 +992,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->module->seeCurrentUrlEquals('/form/example5?username=John&password=1234');
     }
 
+    /**
+     * @env chrome
+     */
     public function testExample5WithSubmitForm()
     {
         $this->module->amOnPage('/form/example5');
@@ -1008,6 +1011,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->module->seeCurrentUrlEquals('/form/example5?username=John&password=1234');
     }
 
+    /**
+     * @env chrome
+     */
     public function testExample5WithSubmitFormAndParams()
     {
         $this->module->amOnPage('/form/example5?a=b');
@@ -1033,6 +1039,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertArrayHasKey('form_name', $form);
     }
 
+    /**
+     * @env chrome
+     */
     public function testSubmitForm()
     {
         $this->module->amOnPage('/form/complex');
@@ -1050,6 +1059,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('kill_all', $form['action']);
     }
 
+    /**
+     * @env chrome
+     */
     public function testSubmitFormWithFillField()
     {
         $this->module->amOnPage('/form/complex');
@@ -1063,6 +1075,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('Is from Iliyum, NY', $form['description']);
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormWithoutButton()
     {
         $this->module->amOnPage('/form/empty');
@@ -1073,6 +1088,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('Hello!', $form['text']);
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormWithAmpersand()
     {
         $this->module->amOnPage('/form/submitform_ampersands');
@@ -1081,6 +1099,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('this & that', $form['test']);
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormWithArrayField()
     {
         $this->module->amOnPage('/form/example17');
@@ -1090,6 +1111,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertArrayNotHasKey('FooBar[bar]', $data);
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormMultiSelectWithArrayParameter()
     {
         $this->module->amOnPage('/form/submitform_multiple');
@@ -1105,6 +1129,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('not seen four', $form['select'][1]);
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormWithMultiSelect()
     {
         $this->module->amOnPage('/form/submitform_multiple');
@@ -1115,6 +1142,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('see test two', $form['select'][1]);
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormCheckboxWithArrayParameter()
     {
         $this->module->amOnPage('/form/field_values');
@@ -1132,6 +1162,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('not seen three', $form['checkbox'][2]);
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormCheckboxWithBooleanArrayParameter()
     {
         $this->module->amOnPage('/form/field_values');
@@ -1157,6 +1190,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->module->fillField('test', 'value');
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormWithDefaultTextareaValue()
     {
         $this->module->amOnPage('/form/textarea');
@@ -1217,6 +1253,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
     }
 
     /**
+     * @env chrome
      * https://github.com/Codeception/Codeception/issues/1051
      */
     public function testSubmitFormWithTwoSubmitButtonsSubmitsCorrectValueAfterFillField()
@@ -1232,6 +1269,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
     }
 
     /*
+     * @env chrome
      * https://github.com/Codeception/Codeception/issues/1274
      */
     public function testSubmitFormWithDocRelativePathForAction()
@@ -1243,6 +1281,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->module->seeCurrentUrlEquals('/form/example11');
     }
 
+    /**
+     * @env chrome
+     */    
     public function testSubmitFormWithDocRelativePathForActionFromDefaultPage()
     {
         $this->module->amOnPage('/form/');
@@ -1260,6 +1301,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
     }
 
     /*
+     * @env chrome
      * https://github.com/Codeception/Codeception/issues/1507
      */
     public function testSubmitFormWithDefaultRadioAndCheckboxValues()
@@ -1275,6 +1317,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertEquals('to be sent', $form['radio1']);
     }
 
+    /**
+     * @env chrome
+     */
     public function testSubmitFormCheckboxWithBoolean()
     {
         $this->module->amOnPage('/form/example16');
@@ -1293,6 +1338,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertArrayNotHasKey('checkbox1', $form, 'Checkbox value sent');
     }
 
+    /**
+     * @env chrome
+     */
     public function testSubmitFormWithCheckboxesWithoutValue()
     {
         $this->module->amOnPage('/form/checkbox_default_value');
@@ -1300,6 +1348,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertSame('on', data::get('query')['checkbox1']);
     }
 
+    /**
+     * @env chrome
+     */
     public function testSubmitFormWithButtons()
     {
         $this->module->amOnPage('/form/form_with_buttons');
@@ -1408,6 +1459,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
     }
 
     /**
+     * @env chrome
      * @Issue https://github.com/Codeception/Codeception/issues/1585
      * @Issue https://github.com/Codeception/Codeception/issues/1602
      */
@@ -1425,6 +1477,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->assertContains('davert', $data['users']);
     }
 
+    /**
+     * @env chrome
+     */
     public function testSubmitAdjacentForms()
     {
         $this->module->amOnPage('/form/submit_adjacentforms');
