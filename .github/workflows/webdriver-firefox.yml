@@ -1,4 +1,4 @@
-name: WebDriver Tests
+name: WebDriver Firefox Tests
 
 on:
   push:
