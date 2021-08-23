@@ -399,6 +399,7 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->click('Submit');
         $form = data::get('form');
         $this->assertEquals('Hello world', $form['name']);
+    }
 
     public function testAppendFieldTextFails()
     {
