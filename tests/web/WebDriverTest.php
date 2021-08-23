@@ -393,12 +393,14 @@ class WebDriverTest extends TestsForBrowsers
 
     public function testTypeOnTextField()
     {
+
         $this->module->amOnPage('/form/field');
         $this->module->fillField('form #name', '');
         $this->module->type('Hello world');
         $this->module->click('Submit');
         $form = data::get('form');
         $this->assertEquals('Hello world', $form['name']);
+
     }
 
     public function testAppendFieldTextFails()
@@ -1033,6 +1035,7 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->seeInCurrentUrl('example2');
         $this->module->switchToNextTab(2);
         $this->module->seeInCurrentUrl('example1');
+        $this->module->seeNumberOfTabs(3);
     }
 
     public function testPerformOnWithArray()

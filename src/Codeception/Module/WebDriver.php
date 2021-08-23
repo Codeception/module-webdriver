@@ -3431,6 +3431,20 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
+     * Checks current number of opened tabs
+     *
+     * ```php
+     * <?php
+     * $I->seeNumberOfTabs(2);
+     * ```
+     * @param $number number of tabs
+     */
+    public function seeNumberOfTabs($number)
+    {
+        $this->assertEquals(count($this->webDriver->getWindowHandles()), $number);
+    }    
+
+    /**
      * Closes current browser tab and switches to previous active tab.
      *
      * ```php
