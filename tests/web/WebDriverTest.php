@@ -393,12 +393,15 @@ class WebDriverTest extends TestsForBrowsers
 
     public function testTypeOnTextField()
     {
-        $this->module->amOnPage('/form/textarea');
+
+        $this->module->amOnPage('/form/field');
         $this->module->fillField('form #name', '');
         $this->module->type('Hello world');
         $this->module->click('Submit');
         $form = data::get('form');
         $this->assertEquals('Hello world', $form['name']);
+
+    }
 
     public function testAppendFieldTextFails()
     {
