@@ -1293,6 +1293,9 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
      */
     public function testSubmitFormWithDefaultRadioAndCheckboxValues()
     {
+        if ($this->module->_getConfig('browser') == 'firefox') {
+            $this->markTestSkipped('does not work for firefox');
+        }
         $this->module->amOnPage('/form/example16');
         $this->module->submitForm('form', array(
             'test' => 'value'
