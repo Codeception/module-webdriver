@@ -2628,7 +2628,7 @@ class WebDriver extends CodeceptionModule implements
      * Try not to use this command on a regular basis.
      * If Codeception lacks a feature you need, please implement it and submit a patch.
      *
-     * @param callable $function
+     * @param \Closure $function
      */
     public function executeInSelenium(\Closure $function)
     {
