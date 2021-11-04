@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Codeception\Module\WebDriver;
 use Codeception\Test\Unit;
+use Codeception\Util\ActionSequence;
 
 /**
  * Author: davert
@@ -1744,5 +1745,25 @@ abstract class TestsForWeb extends Unit
         $this->module->click('Submit');
         $data = data::get('form');
         $this->assertEquals('thisissecret', $data['password']);
+    }
+
+    /**
+     * @see https://github.com/Codeception/module-webdriver/issues/79
+     */
+    public function testFieldActionsWithPerformOn()
+    {
+        $this->module->amOnPage('/form/bug79');
+        $this->module->performOn(
+            ['class' => 'nested'],
+            ActionSequence::build()->fillField('Title', 'Test')
+        );
+
+        $this->module->dontSeeInField('#title-1', 'Test');
+        $this->module->seeInField('#title-2', 'Test');
+
+        $title1Value = $this->module->grabValueFrom('#title-1');
+        $this->assertEmpty($title1Value);
+        $title2Value = $this->module->grabValueFrom('#title-2');
+        $this->assertEquals('Test', $title2Value);
     }
 }
