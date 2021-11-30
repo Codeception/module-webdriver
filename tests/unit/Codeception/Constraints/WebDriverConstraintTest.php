@@ -1,16 +1,16 @@
 <?php
 
-use Codeception\Util\Locator;
+declare(strict_types=1);
+
+use Codeception\PHPUnit\Constraint\WebDriver;
+use Codeception\PHPUnit\TestCase;
 
 require_once __DIR__.'/mocked_webelement.php';
 
-class WebDriverConstraintTest extends \Codeception\PHPUnit\TestCase
+class WebDriverConstraintTest extends TestCase
 {
 
-    /**
-     * @var Codeception\PHPUnit\Constraint\WebDriver
-     */
-    protected $constraint;
+    protected ?WebDriver $constraint = null;
 
     public function _setUp()
     {

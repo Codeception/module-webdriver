@@ -1,4 +1,5 @@
 <?php
+
 namespace Codeception\Lib\Interfaces;
 
 interface SessionSnapshot
@@ -27,13 +28,11 @@ interface SessionSnapshot
      *      // saving snapshot
      *      $I->saveSessionSnapshot('login');
      * }
-     * ?>
      * ```
      *
-     * @param $name
      * @return mixed
      */
-    public function saveSessionSnapshot($name);
+    public function saveSessionSnapshot(string $name);
 
     /**
      * Loads cookies from a saved snapshot.
@@ -41,18 +40,16 @@ interface SessionSnapshot
      *
      * See [saveSessionSnapshot](#saveSessionSnapshot)
      *
-     * @param $name
      * @return mixed
      */
-    public function loadSessionSnapshot($name);
+    public function loadSessionSnapshot(string $name);
 
     /**
      * Deletes session snapshot.
      *
      * See [saveSessionSnapshot](#saveSessionSnapshot)
      *
-     * @param $name
      * @return mixed
      */
-    public function deleteSessionSnapshot($name);
+    public function deleteSessionSnapshot(string $name);
 }

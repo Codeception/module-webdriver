@@ -1,4 +1,5 @@
 <?php
+
 namespace Codeception\Lib\Interfaces;
 
 interface ScreenshotSaver
@@ -10,7 +11,6 @@ interface ScreenshotSaver
      * $this->getModule('{{MODULE_NAME}}')->_saveScreenshot(codecept_output_dir().'screenshot_1.png');
      * ```
      * @api
-     * @param $filename
      */
-    public function _saveScreenshot($filename);
+    public function _saveScreenshot(string $filename);
 }

@@ -1,4 +1,10 @@
 <?php
+
+declare(strict_types=1);
+
+use Codeception\Module\WebDriver;
+use Codeception\Test\Unit;
+
 /**
  * Author: davert
  * Date: 13.01.12
@@ -7,13 +13,9 @@
  * Description:
  *
  */
-
-abstract class TestsForWeb extends \Codeception\Test\Unit
+abstract class TestsForWeb extends Unit
 {
-    /**
-     * @var \Codeception\Module\WebDriver
-     */
-    protected $module;
+    protected ?WebDriver $module = null;
 
     public function testAmOnPage()
     {
@@ -1077,7 +1079,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormWithoutButton()
     {
         $this->module->amOnPage('/form/empty');
@@ -1090,7 +1092,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormWithAmpersand()
     {
         $this->module->amOnPage('/form/submitform_ampersands');
@@ -1101,7 +1103,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormWithArrayField()
     {
         $this->module->amOnPage('/form/example17');
@@ -1113,7 +1115,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormMultiSelectWithArrayParameter()
     {
         $this->module->amOnPage('/form/submitform_multiple');
@@ -1131,7 +1133,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormWithMultiSelect()
     {
         $this->module->amOnPage('/form/submitform_multiple');
@@ -1144,7 +1146,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormCheckboxWithArrayParameter()
     {
         $this->module->amOnPage('/form/field_values');
@@ -1164,7 +1166,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormCheckboxWithBooleanArrayParameter()
     {
         $this->module->amOnPage('/form/field_values');
@@ -1192,7 +1194,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormWithDefaultTextareaValue()
     {
         $this->module->amOnPage('/form/textarea');
@@ -1270,7 +1272,7 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormWithDocRelativePathForActionFromDefaultPage()
     {
         $this->module->amOnPage('/form/');
@@ -1529,12 +1531,12 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->module->selectOption('//input[@name="input_radio_name"]', '1');
         $this->module->selectOption('//input[@name="input_radio_name"]', '2');
 
-        $this->module->checkOption('//input[@name="input_checkbox_name"]', '1');
-        $this->module->checkOption('//input[@name="input_checkbox_name"]', '2');
+        $this->module->checkOption('//input[@name="input_checkbox_name"]');
+        $this->module->checkOption('//input[@name="input_checkbox_name"]');
 
-        $this->module->checkOption('//input[@name="input[checkbox][name][]"]', '1');
-        $this->module->checkOption('//input[@name="input[checkbox][name][]"]', '2');
-        $this->module->checkOption('//input[@name="input[checkbox][name][]"]', '1');
+        $this->module->checkOption('//input[@name="input[checkbox][name][]"]');
+        $this->module->checkOption('//input[@name="input[checkbox][name][]"]');
+        $this->module->checkOption('//input[@name="input[checkbox][name][]"]');
 
         $this->module->selectOption('//select[@name="select_name"]', '1');
 
@@ -1568,21 +1570,21 @@ abstract class TestsForWeb extends \Codeception\Test\Unit
         $this->module->see('Is that interesting?');
         $this->module->click('Ссылочка');
     }
-    
+
     public function testGrabMultiple()
     {
         $this->module->amOnPage('/info');
-        
+
         $arr = $this->module->grabMultiple('#grab-multiple a:first-child');
         $this->assertCount(1, $arr);
         $this->assertEquals('First', $arr[0]);
-        
+
         $arr = $this->module->grabMultiple('#grab-multiple a');
         $this->assertCount(3, $arr);
         $this->assertEquals('First', $arr[0]);
         $this->assertEquals('Second', $arr[1]);
         $this->assertEquals('Third', $arr[2]);
-        
+
         // href for WebDriver with selenium returns a full link, so testing with ID
         $arr = $this->module->grabMultiple('#grab-multiple a', 'id');
         $this->assertCount(3, $arr);

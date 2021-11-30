@@ -1,6 +1,9 @@
 <?php
 
-use Codeception\Step;
+declare(strict_types=1);
+
+use Codeception\Module\WebDriver;
+use Codeception\Util\Maybe;
 use Codeception\Util\Stub;
 use Facebook\WebDriver\Cookie;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
@@ -11,20 +14,17 @@ use Facebook\WebDriver\WebDriverKeys;
 require_once codecept_data_dir() . 'app/data.php';
 require_once __DIR__ . '/../unit/Codeception/Module/TestsForBrowsers.php';
 
-class WebDriverTest extends TestsForBrowsers
+final class WebDriverTest extends TestsForBrowsers
 {
-    /**
-     * @var \Codeception\Module\WebDriver
-     */
-    protected $module;
+    protected ?WebDriver $module;
 
     /**
      * @var RemoteWebDriver
      */
     protected $webDriver;
 
-    const MODULE_CLASS = 'Codeception\Module\WebDriver';
-    const WEBDRIVER_CLASS = 'Facebook\WebDriver\Remote\RemoteWebDriver';
+    public const MODULE_CLASS = 'Codeception\Module\WebDriver';
+    public const WEBDRIVER_CLASS = 'Facebook\WebDriver\Remote\RemoteWebDriver';
 
     public function _before()
     {
@@ -183,7 +183,7 @@ class WebDriverTest extends TestsForBrowsers
 
     /**
      * @env chrome
-     */    
+     */
     public function testSubmitFormWithNumbers()
     {
         $this->module->amOnPage('/form/complex');
@@ -474,7 +474,7 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->appendField('form input[name=terms]', 'Get Off123');
     }
 
-    // 
+    //
     /**
      * @Issue https://github.com/Codeception/Codeception/pull/875
      * @env chrome
@@ -559,9 +559,7 @@ class WebDriverTest extends TestsForBrowsers
             'getPageSource' => Stub::once(function () {
             }),
             'manage' => Stub::make('\Facebook\WebDriver\WebDriverOptions', [
-                'getAvailableLogTypes' => Stub::atLeastOnce(function () {
-                    return [];
-                }),
+                'getAvailableLogTypes' => Stub::atLeastOnce(fn() => []),
             ]),
         ]);
         $module = Stub::make(self::MODULE_CLASS, ['webDriver' => $fakeWd]);
@@ -578,9 +576,7 @@ class WebDriverTest extends TestsForBrowsers
             'getPageSource' => Stub::once(function () {
             }),
             'manage' => Stub::make('\Facebook\WebDriver\WebDriverOptions', [
-                'getAvailableLogTypes' => Stub::atLeastOnce(function () {
-                    return [];
-                }),
+                'getAvailableLogTypes' => Stub::atLeastOnce(fn() => []),
             ]),
         ]);
         $module = Stub::make(self::MODULE_CLASS, ['webDriver' => $fakeWd]);
@@ -601,9 +597,7 @@ class WebDriverTest extends TestsForBrowsers
             'getPageSource' => Stub::once(function () {
             }),
             'manage' => Stub::make('\Facebook\WebDriver\WebDriverOptions', [
-                'getAvailableLogTypes' => Stub::atLeastOnce(function () {
-                    return [];
-                }),
+                'getAvailableLogTypes' => Stub::atLeastOnce(fn() => []),
             ]),
         ]);
         $module = Stub::make(self::MODULE_CLASS, ['webDriver' => $fakeWd]);
@@ -612,9 +606,7 @@ class WebDriverTest extends TestsForBrowsers
 
     public function testWebDriverWaits()
     {
-        $fakeWd = Stub::make(self::WEBDRIVER_CLASS, ['wait' => Stub::exactly(16, function () {
-            return new \Codeception\Util\Maybe();
-        })]);
+        $fakeWd = Stub::make(self::WEBDRIVER_CLASS, ['wait' => Stub::exactly(16, fn() => new Maybe())]);
         $module = Stub::make(self::MODULE_CLASS, ['webDriver' => $fakeWd]);
         $module->waitForElement(WebDriverBy::partialLinkText('yeah'));
         $module->waitForElement(['id' => 'user']);
@@ -715,7 +707,7 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->seeCookie('PHPSESSID');
     }
 
-    public function testSessionSnapshotsAreDeleted() 
+    public function testSessionSnapshotsAreDeleted()
     {
         $this->notForPhantomJS();
         $this->module->amOnPage('/');
@@ -731,27 +723,23 @@ class WebDriverTest extends TestsForBrowsers
     {
         $this->notForPhantomJS();
         $fakeWdOptions = Stub::make('\Facebook\WebDriver\WebDriverOptions', [
-            'getCookies' => Stub::atLeastOnce(function () {
-                return [
-                    Cookie::createFromArray([
-                        'name' => 'PHPSESSID',
-                        'value' => '123456',
-                        'path' => '/',
-                    ]),
-                    Cookie::createFromArray([
-                        'name' => '3rdParty',
-                        'value' => '_value_',
-                        'path' => '/',
-                        'domain' => '.3rd-party.net',
-                    ])
-                ];
-            }),
+            'getCookies' => Stub::atLeastOnce(fn() => [
+                Cookie::createFromArray([
+                    'name' => 'PHPSESSID',
+                    'value' => '123456',
+                    'path' => '/',
+                ]),
+                Cookie::createFromArray([
+                    'name' => '3rdParty',
+                    'value' => '_value_',
+                    'path' => '/',
+                    'domain' => '.3rd-party.net',
+                ])
+            ]),
         ]);
 
         $fakeWd = Stub::make(self::WEBDRIVER_CLASS, [
-            'manage' => Stub::atLeastOnce(function () use ($fakeWdOptions) {
-                return $fakeWdOptions;
-            }),
+            'manage' => Stub::atLeastOnce(fn() => $fakeWdOptions),
         ]);
 
         // Mock the WebDriverOptions::getCookies() method on the first call to introduce a 3rd-party cookie
@@ -1055,7 +1043,7 @@ class WebDriverTest extends TestsForBrowsers
     {
         $asserts = PHPUnit_Framework_Assert::getCount();
         $this->module->amOnPage('/form/example1');
-        $this->module->performOn('.rememberMe', function (\Codeception\Module\WebDriver $I) {
+        $this->module->performOn('.rememberMe', function (WebDriver $I) {
             $I->see('Remember me next time');
             $I->seeElement('#LoginForm_rememberMe');
             $I->dontSee('Login');
