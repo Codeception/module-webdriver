@@ -1,5 +1,9 @@
 <?php
+
+declare(strict_types=1);
+
 require_once 'TestsForWeb.php';
+
 /**
  * Author: davert
  * Date: 13.01.12
@@ -8,10 +12,8 @@ require_once 'TestsForWeb.php';
  * Description:
  *
  */
-
 abstract class TestsForBrowsers extends TestsForWeb
 {
-   
     public function testAmOnSubdomain()
     {
         $this->module->_reconfigure(array('url' => 'http://google.com'));

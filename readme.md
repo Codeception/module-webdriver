@@ -9,7 +9,7 @@ A WebDriver module for Codeception.
 ## Installation
 
 ```
-composer require --dev "codeception/module-webdriver"
+composer require "codeception/module-webdriver" --dev
 ```
 
 ## Documentation
