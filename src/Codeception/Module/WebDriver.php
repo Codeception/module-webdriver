@@ -1255,7 +1255,7 @@ class WebDriver extends CodeceptionModule implements
         }
 
         if (is_array($selector) || ($selector instanceof WebDriverBy)) {
-            $fields = $this->match($this->webDriver, $selector);
+            $fields = $this->match($this->getBaseElement(), $selector);
 
             if (empty($fields)) {
                 throw new ElementNotFound($selector);
@@ -1272,20 +1272,20 @@ class WebDriver extends CodeceptionModule implements
             ".//label[contains(normalize-space(string(.)), {$locator})]//.//*[self::input | self::textarea | self::select][not(./@type = 'submit' or ./@type = 'image' or ./@type = 'hidden')]"
         // @codingStandardsIgnoreEnd
         );
-        $fields = $this->webDriver->findElements(WebDriverBy::xpath($xpath));
+        $fields = $this->getBaseElement()->findElements(WebDriverBy::xpath($xpath));
         if (!empty($fields)) {
             return $fields;
         }
 
         // by name
         $xpath = ".//*[self::input | self::textarea | self::select][@name = {$locator}]";
-        $fields = $this->webDriver->findElements(WebDriverBy::xpath($xpath));
+        $fields = $this->getBaseElement()->findElements(WebDriverBy::xpath($xpath));
         if (!empty($fields)) {
             return $fields;
         }
 
         // try to match by CSS or XPath
-        $fields = $this->match($this->webDriver, $selector, false);
+        $fields = $this->match($this->getBaseElement(), $selector, false);
         if (!empty($fields)) {
             return $fields;
         }
