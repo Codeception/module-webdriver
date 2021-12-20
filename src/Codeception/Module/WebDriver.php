@@ -2620,10 +2620,11 @@ class WebDriver extends CodeceptionModule implements
      * $I->waitForText('foo', 30, '.title'); // secs
      * ```
      *
-     * @param int $timeout seconds
+     * @param ?int $timeout seconds
+     * @param ?string|?string[] $selector
      * @throws Exception
      */
-    public function waitForText(string $text, int $timeout = 10, string $selector = null): void
+    public function waitForText(string $text, ?int $timeout = 10, ?mixed $selector = null): void
     {
         $message = sprintf(
             'Waited for %d secs but text %s still not found',
