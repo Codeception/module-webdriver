@@ -2656,7 +2656,7 @@ class WebDriver extends CodeceptionModule implements
             );
         }
 
-        usleep($timeout * 1_000_000);
+        usleep((int)($timeout * 1_000_000));
     }
 
     /**
