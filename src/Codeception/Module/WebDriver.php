@@ -2427,7 +2427,7 @@ class WebDriver extends CodeceptionModule implements
         $form = $this->matchFirstOrFail($this->getBaseElement(), $selector);
 
         $fields = $form->findElements(
-            WebDriverBy::cssSelector('input:enabled,textarea:enabled,select:enabled,input[type=hidden]')
+            WebDriverBy::cssSelector('input:enabled[name],textarea:enabled[name],select:enabled[name],input[type=hidden][name]')
         );
         foreach ($fields as $field) {
             $fieldName = $this->getSubmissionFormFieldName($field->getAttribute('name'));
