@@ -856,9 +856,6 @@ class WebDriver extends CodeceptionModule implements
         }
     }
 
-    /**
-     * @param string|array|WebDriverBy $locator
-     */
     public function _findElements($locator): array
     {
         return $this->match($this->webDriver, $locator);
@@ -1160,10 +1157,6 @@ class WebDriver extends CodeceptionModule implements
         );
     }
 
-    /**
-     * @param string|array|WebDriverBy $link
-     * @param string|array|WebDriverBy|null $context
-     */
     public function click($link, $context = null)
     {
         $page = $this->webDriver;
@@ -1408,53 +1401,33 @@ class WebDriver extends CodeceptionModule implements
         return $matches[1];
     }
 
-    /**
-     * @param string|array|WebDriverBy $checkbox
-     */
     public function seeCheckboxIsChecked($checkbox)
     {
         $this->assertTrue($this->findField($checkbox)->isSelected());
     }
 
-    /**
-     * @param string|array|WebDriverBy $checkbox
-     */
     public function dontSeeCheckboxIsChecked($checkbox)
     {
         $this->assertFalse($this->findField($checkbox)->isSelected());
     }
 
-    /**
-     * @param string|array|WebDriverBy|WebDriverElement $field
-     * @param $value
-     */
     public function seeInField($field, $value)
     {
         $els = $this->findFields($field);
         $this->assert($this->proceedSeeInField($els, $value));
     }
 
-    /**
-     * @param string|array|WebDriverBy|WebDriverElement $field
-     * @param $value
-     */
     public function dontSeeInField($field, $value)
     {
         $els = $this->findFields($field);
         $this->assertNot($this->proceedSeeInField($els, $value));
     }
 
-    /**
-     * @param string|array|WebDriverBy $formSelector
-     */
     public function seeInFormFields($formSelector, array $params)
     {
         $this->proceedSeeInFormFields($formSelector, $params, false);
     }
 
-    /**
-     * @param string|array|WebDriverBy $formSelector
-     */
     public function dontSeeInFormFields($formSelector, array $params)
     {
         $this->proceedSeeInFormFields($formSelector, $params, true);
@@ -1581,10 +1554,6 @@ class WebDriver extends CodeceptionModule implements
         ];
     }
 
-    /**
-     * @param string|array|WebDriverBy|WebDriverElement $select
-     * @param string|array|WebDriverBy $option
-     */
     public function selectOption($select, $option): void
     {
         $el = $this->findField($select);
@@ -1871,9 +1840,6 @@ class WebDriver extends CodeceptionModule implements
         return $els;
     }
 
-    /**
-     * @param string|array|WebDriverBy|WebDriverElement $option
-     */
     public function checkOption($option): void
     {
         $field = $this->findCheckable($this->webDriver, $option);
@@ -1888,9 +1854,6 @@ class WebDriver extends CodeceptionModule implements
         $field->click();
     }
 
-    /**
-     * @param string|array|WebDriverBy|WebDriverElement $option
-     */
     public function uncheckOption($option): void
     {
         $field = $this->findCheckable($this->getBaseElement(), $option);
@@ -1905,9 +1868,6 @@ class WebDriver extends CodeceptionModule implements
         $field->click();
     }
 
-    /**
-     * @param string|array|WebDriverBy|WebDriverElement $field
-     */
     public function fillField($field, $value): void
     {
         $el = $this->findField($field);
@@ -1963,10 +1923,6 @@ class WebDriver extends CodeceptionModule implements
         sleep($delay);
     }
 
-    /**
-     * @param string|array|WebDriverBy $field
-     * @param string $filename
-     */
     public function attachFile($field, $filename)
     {
         $el = $this->findField($field);
@@ -2008,9 +1964,6 @@ class WebDriver extends CodeceptionModule implements
         return '';
     }
 
-    /**
-     * @param string|array|WebDriverBy $cssOrXPathOrRegex
-     */
     public function grabTextFrom($cssOrXPathOrRegex)
     {
         $els = $this->match($this->getBaseElement(), $cssOrXPathOrRegex, false);
@@ -2025,19 +1978,12 @@ class WebDriver extends CodeceptionModule implements
         throw new ElementNotFound($cssOrXPathOrRegex, 'CSS or XPath or Regex');
     }
 
-    /**
-     * @param string|array|WebDriverBy $cssOrXpath
-     * @param string|null $attribute
-     */
     public function grabAttributeFrom($cssOrXpath, $attribute): ?string
     {
         $el = $this->matchFirstOrFail($this->getBaseElement(), $cssOrXpath);
         return $el->getAttribute($attribute);
     }
 
-    /**
-     * @param string|array|WebDriverBy $field
-     */
     public function grabValueFrom($field): ?string
     {
         $el = $this->findField($field);
@@ -2050,12 +1996,6 @@ class WebDriver extends CodeceptionModule implements
         return $el->getAttribute('value');
     }
 
-    /**
-     * @param string|array|WebDriverBy$cssOrXpath
-     * @param string|null $attribute
-     * @return array|null[]|string[]
-     * @throws ModuleException
-     */
     public function grabMultiple($cssOrXpath, $attribute = null): array
     {
         $els = $this->match($this->getBaseElement(), $cssOrXpath);
@@ -2172,10 +2112,6 @@ class WebDriver extends CodeceptionModule implements
         }
     }
 
-    /**
-     * @param string|array|WebDriverBy $selector
-     * @param string $optionText
-     */
     public function seeOptionIsSelected($selector, $optionText): void
     {
         $el = $this->findField($selector);
@@ -2197,10 +2133,6 @@ class WebDriver extends CodeceptionModule implements
         }
     }
 
-    /**
-     * @param string|array|WebDriverBy $selector
-     * @param $optionText
-     */
     public function dontSeeOptionIsSelected($selector, $optionText): void
     {
         $el = $this->findField($selector);
