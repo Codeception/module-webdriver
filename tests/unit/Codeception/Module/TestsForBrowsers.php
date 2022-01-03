@@ -18,11 +18,11 @@ abstract class TestsForBrowsers extends TestsForWeb
     {
         $this->module->_reconfigure(array('url' => 'http://google.com'));
         $this->module->amOnSubdomain('user');
-        $this->assertEquals('http://user.google.com', $this->module->_getUrl());
+        $this->assertSame('http://user.google.com', $this->module->_getUrl());
 
         $this->module->_reconfigure(array('url' => 'http://www.google.com'));
         $this->module->amOnSubdomain('user');
-        $this->assertEquals('http://user.google.com', $this->module->_getUrl());
+        $this->assertSame('http://user.google.com', $this->module->_getUrl());
     }
 
     public function testOpenAbsoluteUrls()
@@ -33,7 +33,7 @@ abstract class TestsForBrowsers extends TestsForWeb
         $this->module->see('Information', 'h1');
         $this->module->amOnPage('/form/empty');
         $this->module->seeCurrentUrlEquals('/form/empty');
-        $this->assertEquals('http://127.0.0.1:8000', $this->module->_getUrl(), 'Host has changed');
+        $this->assertSame('http://127.0.0.1:8000', $this->module->_getUrl(), 'Host has changed');
     }
 
     public function testHeadersRedirect()

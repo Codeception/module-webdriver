@@ -2081,7 +2081,7 @@ class WebDriver extends CodeceptionModule implements
                 'Number of elements counted differs from expected range'
             );
         } else {
-            $this->assertEquals(
+            $this->assertSame(
                 $expected,
                 $counted,
                 'Number of elements counted differs from expected number'
@@ -2104,7 +2104,7 @@ class WebDriver extends CodeceptionModule implements
                 'Number of elements counted differs from expected range'
             );
         } else {
-            $this->assertEquals(
+            $this->assertSame(
                 $expected,
                 $counted,
                 'Number of elements counted differs from expected number'
@@ -3489,7 +3489,7 @@ class WebDriver extends CodeceptionModule implements
      */
     public function seeNumberOfTabs($number): void
     {
-        $this->assertEquals(count($this->webDriver->getWindowHandles()), $number);
+        $this->assertSame(count($this->webDriver->getWindowHandles()), $number);
     }    
 
     /**

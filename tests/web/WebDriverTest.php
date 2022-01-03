@@ -70,7 +70,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->selectOption('form select[name=age]', '21-60');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('adult', $form['age']);
+        $this->assertSame('adult', $form['age']);
     }
 
     public function testSelectInvalidOptionForSecondSelectFails()
@@ -174,11 +174,11 @@ final class WebDriverTest extends TestsForBrowsers
                 'description' => 'My Bio'
         ]);
         $form = data::get('form');
-        $this->assertEquals('Davert', $form['name']);
-        $this->assertEquals('kill_all', $form['action']);
-        $this->assertEquals('My Bio', $form['description']);
-        $this->assertEquals('agree', $form['terms']);
-        $this->assertEquals('child', $form['age']);
+        $this->assertSame('Davert', $form['name']);
+        $this->assertSame('kill_all', $form['action']);
+        $this->assertSame('My Bio', $form['description']);
+        $this->assertSame('agree', $form['terms']);
+        $this->assertSame('child', $form['age']);
     }
 
     /**
@@ -194,11 +194,11 @@ final class WebDriverTest extends TestsForBrowsers
             'description' => 10
         ]);
         $form = data::get('form');
-        $this->assertEquals('Davert', $form['name']);
-        $this->assertEquals('kill_all', $form['action']);
-        $this->assertEquals('10', $form['description']);
-        $this->assertEquals('agree', $form['terms']);
-        $this->assertEquals('child', $form['age']);
+        $this->assertSame('Davert', $form['name']);
+        $this->assertSame('kill_all', $form['action']);
+        $this->assertSame('10', $form['description']);
+        $this->assertSame('agree', $form['terms']);
+        $this->assertSame('child', $form['age']);
     }
 
     /**
@@ -217,11 +217,11 @@ final class WebDriverTest extends TestsForBrowsers
 
         $form = data::get('form');
 
-        $this->assertEquals('Davert', $form['name']);
-        $this->assertEquals('kill_all', $form['action']);
-        $this->assertEquals('My Bio', $form['description']);
-        $this->assertEquals('agree', $form['terms']);
-        $this->assertEquals('child', $form['age']);
+        $this->assertSame('Davert', $form['name']);
+        $this->assertSame('kill_all', $form['action']);
+        $this->assertSame('My Bio', $form['description']);
+        $this->assertSame('agree', $form['terms']);
+        $this->assertSame('child', $form['age']);
     }
 
     public function strictSelectorProvider()
@@ -252,11 +252,11 @@ final class WebDriverTest extends TestsForBrowsers
 
         $form = data::get('form');
 
-        $this->assertEquals('Davert', $form['name']);
-        $this->assertEquals('kill_all', $form['action']);
-        $this->assertEquals('My Bio', $form['description']);
-        $this->assertEquals('agree', $form['terms']);
-        $this->assertEquals('child', $form['age']);
+        $this->assertSame('Davert', $form['name']);
+        $this->assertSame('kill_all', $form['action']);
+        $this->assertSame('My Bio', $form['description']);
+        $this->assertSame('agree', $form['terms']);
+        $this->assertSame('child', $form['age']);
     }
 
     public function webDriverByProvider()
@@ -277,7 +277,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->selectOption('form', 'disagree');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('disagree', $form['terms']);
+        $this->assertSame('disagree', $form['terms']);
     }
 
     public function testRadioButtonByLabelOnContext()
@@ -288,7 +288,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->dontSeeOptionIsSelected('form input', 'agree');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('disagree', $form['terms']);
+        $this->assertSame('disagree', $form['terms']);
     }
 
     public function testRadioButtonByLabel()
@@ -297,7 +297,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->checkOption('Get Off');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('disagree', $form['terms']);
+        $this->assertSame('disagree', $form['terms']);
     }
 
 
@@ -362,7 +362,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->appendField('form #description', ' code');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('eat code', $form['description']);
+        $this->assertSame('eat code', $form['description']);
     }
 
     public function testTypeOnTextarea()
@@ -372,7 +372,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->type('Hello world');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('Hello world', $form['description']);
+        $this->assertSame('Hello world', $form['description']);
     }
 
     public function testAppendFieldTextareaFails()
@@ -388,7 +388,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->appendField('form #name', ' code');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('OLD_VALUE code', $form['name']);
+        $this->assertSame('OLD_VALUE code', $form['name']);
     }
 
     public function testTypeOnTextField()
@@ -399,7 +399,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->type('Hello world');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('Hello world', $form['name']);
+        $this->assertSame('Hello world', $form['name']);
 
     }
 
@@ -416,7 +416,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->appendField('form input[name=terms]', 'agree');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('agree', $form['terms']);
+        $this->assertSame('agree', $form['terms']);
     }
 
     public function testAppendFieldCheckboxByValueFails()
@@ -432,7 +432,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->appendField('form input[name=terms]', 'I Agree');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('agree', $form['terms']);
+        $this->assertSame('agree', $form['terms']);
     }
 
     public function testAppendFieldCheckboxByLabelFails()
@@ -448,7 +448,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->appendField('form input[name=terms]', 'disagree');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('disagree', $form['terms']);
+        $this->assertSame('disagree', $form['terms']);
     }
 
     public function testAppendFieldRadioButtonByValueFails()
@@ -464,7 +464,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->appendField('form input[name=terms]', 'Get Off');
         $this->module->click('Submit');
         $form = data::get('form');
-        $this->assertEquals('disagree', $form['terms']);
+        $this->assertSame('disagree', $form['terms']);
     }
 
     public function testAppendFieldRadioButtonByLabelFails()
@@ -486,7 +486,7 @@ final class WebDriverTest extends TestsForBrowsers
            'password' => '123456'
         ]);
         $form = data::get('form');
-        $this->assertEquals('123456', $form['password']);
+        $this->assertSame('123456', $form['password']);
     }
 
     /**
@@ -571,7 +571,7 @@ final class WebDriverTest extends TestsForBrowsers
     {
         $fakeWd = Stub::make(self::WEBDRIVER_CLASS, [
             'takeScreenshot' => Stub::once(function ($filename) {
-                PHPUnit_Framework_Assert::assertEquals(codecept_log_dir('stdClass.login.fail.png'), $filename);
+                PHPUnit_Framework_Assert::assertSame(codecept_log_dir('stdClass.login.fail.png'), $filename);
             }),
             'getPageSource' => Stub::once(function () {
             }),
@@ -589,7 +589,7 @@ final class WebDriverTest extends TestsForBrowsers
         $test = Stub::make('\Codeception\TestCase\Test', ['getName' => 'testLogin']);
         $fakeWd = Stub::make(self::WEBDRIVER_CLASS, [
             'takeScreenshot' => Stub::once(function ($filename) use ($test) {
-                PHPUnit_Framework_Assert::assertEquals(
+                PHPUnit_Framework_Assert::assertSame(
                     codecept_log_dir(get_class($test).'.testLogin.fail.png'),
                     $filename
                 );
@@ -1035,7 +1035,7 @@ final class WebDriverTest extends TestsForBrowsers
             'seeElement' => '#LoginForm_rememberMe',
             'dontSee' => 'Login'
         ]);
-        $this->assertEquals(3, PHPUnit_Framework_Assert::getCount() - $asserts);
+        $this->assertSame(3, PHPUnit_Framework_Assert::getCount() - $asserts);
         $this->module->see('Login');
     }
 
@@ -1048,7 +1048,7 @@ final class WebDriverTest extends TestsForBrowsers
             $I->seeElement('#LoginForm_rememberMe');
             $I->dontSee('Login');
         });
-        $this->assertEquals(3, PHPUnit_Framework_Assert::getCount() - $asserts);
+        $this->assertSame(3, PHPUnit_Framework_Assert::getCount() - $asserts);
         $this->module->see('Login');
     }
 
@@ -1061,7 +1061,7 @@ final class WebDriverTest extends TestsForBrowsers
             ->seeElement('#LoginForm_rememberMe')
             ->dontSee('Login')
         );
-        $this->assertEquals(3, PHPUnit_Framework_Assert::getCount() - $asserts);
+        $this->assertSame(3, PHPUnit_Framework_Assert::getCount() - $asserts);
         $this->module->see('Login');
     }
 
@@ -1074,7 +1074,7 @@ final class WebDriverTest extends TestsForBrowsers
             ->see('next time')
             ->dontSee('Login')
         );
-        $this->assertEquals(3, PHPUnit_Framework_Assert::getCount() - $asserts);
+        $this->assertSame(3, PHPUnit_Framework_Assert::getCount() - $asserts);
         $this->module->see('Login');
     }
 
