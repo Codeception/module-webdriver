@@ -706,6 +706,19 @@ abstract class TestsForWeb extends Unit
         $this->assertSame('test', $result);
     }
 
+    public function testGrabTextFromWithArraySelectorForExistingElement()
+    {
+        $this->module->amOnPage('/');
+        $this->assertSame('More info', $this->module->grabTextFrom(['id' => 'link']));
+    }
+
+    public function testGrabTextFromWithArraySelectorForNonExistentElement()
+    {
+        $this->module->amOnPage('/');
+        $this->expectException('Codeception\Exception\ElementNotFound');
+        $this->module->grabTextFrom(['id' => 'unknown_link']);
+    }
+
     public function testGrabValueFrom()
     {
         $this->module->amOnPage('/form/hidden');
