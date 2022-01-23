@@ -1971,7 +1971,10 @@ class WebDriver extends CodeceptionModule implements
             return $els[0]->getText();
         }
 
-        if (@preg_match($cssOrXPathOrRegex, $this->webDriver->getPageSource(), $matches)) {
+        if (
+            is_string($cssOrXPathOrRegex)
+            && @preg_match($cssOrXPathOrRegex, $this->webDriver->getPageSource(), $matches)
+        ) {
             return $matches[1];
         }
 
