@@ -1,4 +1,4 @@
-class_name: WebGuy
+actor: WebGuy
 modules:
   enabled: [WebDriver, WebHelper]
   config:
