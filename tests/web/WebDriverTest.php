@@ -588,9 +588,7 @@ final class WebDriverTest extends TestsForBrowsers
 
     public function testCreateTestScreenshotOnFail()
     {
-        // TODO
-        $this->markTestSkipped('Temporarily disabled, needs to be fixed.');
-        $test = Stub::make('\Codeception\TestCase\Test', ['getName' => 'testLogin']);
+        $test = Stub::make(\Codeception\Test\Unit::class, ['getName' => 'testLogin']);
         $fakeWd = Stub::make(self::WEBDRIVER_CLASS, [
             'takeScreenshot' => Expected::once(function ($filename) use ($test) {
                 Assert::assertSame(
