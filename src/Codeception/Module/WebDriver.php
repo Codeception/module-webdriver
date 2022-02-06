@@ -45,6 +45,7 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\Remote\RemoteWebElement;
 use Facebook\WebDriver\Remote\UselessFileDetector;
 use Facebook\WebDriver\Remote\WebDriverCapabilityType;
+use Facebook\WebDriver\WebDriver as WebDriverInterface;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverDimension;
 use Facebook\WebDriver\WebDriverElement;
@@ -387,12 +388,9 @@ class WebDriver extends CodeceptionModule implements
     /**
      * @var string[]
      */
-    protected $requiredFields = ['browser', 'url'];
+    protected array $requiredFields = ['browser', 'url'];
 
-    /**
-     * @var array
-     */
-    protected $config = [
+    protected array $config = [
         'protocol'             => 'http',
         'host'                 => '127.0.0.1',
         'port'                 => '4444',
@@ -756,7 +754,7 @@ class WebDriver extends CodeceptionModule implements
         $this->baseElement = null;
     }
 
-    public function amOnSubdomain($subdomain)
+    public function amOnSubdomain(string $subdomain): void
     {
         $url = $this->config['url'];
         $url = preg_replace('#(https?://)(.*\.)(.*\.)#', "$1$3", $url); // removing current subdomain
@@ -864,7 +862,7 @@ class WebDriver extends CodeceptionModule implements
     /**
      * Saves HTML source of a page to a file
      */
-    public function _savePageSource($filename)
+    public function _savePageSource(string $filename): void
     {
         if ($this->webDriver === null) {
             $this->debug('WebDriver::_savePageSource method has been called when webDriver is not set');
@@ -936,7 +934,7 @@ class WebDriver extends CodeceptionModule implements
         $this->debugSection('Screenshot Saved', "file://{$screenName}");
     }
 
-    public function makeHtmlSnapshot($name = null)
+    public function makeHtmlSnapshot(string $name = null): void
     {
         if (empty($name)) {
             $name = uniqid(date("Y-m-d_H-i-s_"));
@@ -1035,7 +1033,7 @@ class WebDriver extends CodeceptionModule implements
         $this->debugCookies();
     }
 
-    public function grabCookie($cookie, array $params = [])
+    public function grabCookie($cookie, array $params = []): mixed
     {
         $params['name'] = $cookie;
         $cookies = $this->filterCookies($this->webDriver->manage()->getCookies(), $params);
@@ -1157,7 +1155,7 @@ class WebDriver extends CodeceptionModule implements
         );
     }
 
-    public function click($link, $context = null)
+    public function click($link, $context = null): void
     {
         $page = $this->webDriver;
         if ($context) {
@@ -1308,7 +1306,7 @@ class WebDriver extends CodeceptionModule implements
         return reset($arr);
     }
 
-    public function seeLink($text, $url = null)
+    public function seeLink(string $text, string $url = null): void
     {
         $this->enableImplicitWait();
         $nodes = $this->getBaseElement()->findElements(WebDriverBy::partialLinkText($text));
@@ -1326,7 +1324,7 @@ class WebDriver extends CodeceptionModule implements
         $this->assertNotEmpty($nodes, "No links containing text '{$text}' and URL '{$url}' were found in page {$currentUri}");
     }
 
-    public function dontSeeLink($text, $url = null)
+    public function dontSeeLink(string $text, string $url = ''): void
     {
         $nodes = $this->getBaseElement()->findElements(WebDriverBy::partialLinkText($text));
         $currentUri = $this->_getCurrentUri();
@@ -1352,37 +1350,37 @@ class WebDriver extends CodeceptionModule implements
         );
     }
 
-    public function seeInCurrentUrl($uri)
+    public function seeInCurrentUrl(string $uri): void
     {
         $this->assertStringContainsString($uri, $this->_getCurrentUri());
     }
 
-    public function seeCurrentUrlEquals($uri)
+    public function seeCurrentUrlEquals(string $uri): void
     {
         $this->assertEquals($uri, $this->_getCurrentUri());
     }
 
-    public function seeCurrentUrlMatches($uri)
+    public function seeCurrentUrlMatches(string $uri): void
     {
         $this->assertRegExp($uri, $this->_getCurrentUri());
     }
 
-    public function dontSeeInCurrentUrl($uri)
+    public function dontSeeInCurrentUrl(string $uri): void
     {
         $this->assertStringNotContainsString($uri, $this->_getCurrentUri());
     }
 
-    public function dontSeeCurrentUrlEquals($uri)
+    public function dontSeeCurrentUrlEquals(string $uri): void
     {
         $this->assertNotEquals($uri, $this->_getCurrentUri());
     }
 
-    public function dontSeeCurrentUrlMatches($uri)
+    public function dontSeeCurrentUrlMatches(string $uri): void
     {
         $this->assertNotRegExp($uri, $this->_getCurrentUri());
     }
 
-    public function grabFromCurrentUrl($uri = null)
+    public function grabFromCurrentUrl($uri = null): mixed
     {
         if (!$uri) {
             return $this->_getCurrentUri();
@@ -1401,34 +1399,34 @@ class WebDriver extends CodeceptionModule implements
         return $matches[1];
     }
 
-    public function seeCheckboxIsChecked($checkbox)
+    public function seeCheckboxIsChecked($checkbox): void
     {
         $this->assertTrue($this->findField($checkbox)->isSelected());
     }
 
-    public function dontSeeCheckboxIsChecked($checkbox)
+    public function dontSeeCheckboxIsChecked(string $checkbox): void
     {
         $this->assertFalse($this->findField($checkbox)->isSelected());
     }
 
-    public function seeInField($field, $value)
+    public function seeInField($field, $value): void
     {
         $els = $this->findFields($field);
         $this->assert($this->proceedSeeInField($els, $value));
     }
 
-    public function dontSeeInField($field, $value)
+    public function dontSeeInField($field, $value): void
     {
         $els = $this->findFields($field);
         $this->assertNot($this->proceedSeeInField($els, $value));
     }
 
-    public function seeInFormFields($formSelector, array $params)
+    public function seeInFormFields($formSelector, array $params): void
     {
         $this->proceedSeeInFormFields($formSelector, $params, false);
     }
 
-    public function dontSeeInFormFields($formSelector, array $params)
+    public function dontSeeInFormFields($formSelector, array $params): void
     {
         $this->proceedSeeInFormFields($formSelector, $params, true);
     }
@@ -1644,7 +1642,7 @@ class WebDriver extends CodeceptionModule implements
      *
      * @api
      */
-    public function _initializeSession()
+    public function _initializeSession(): void
     {
         try {
             $this->sessions[] = $this->webDriver;
@@ -1674,7 +1672,7 @@ class WebDriver extends CodeceptionModule implements
      * @param RemoteWebDriver $session
      * @api
      */
-    public function _loadSession($session)
+    public function _loadSession($session): void
     {
         $this->webDriver = $session;
         $this->setBaseElement();
@@ -1685,7 +1683,7 @@ class WebDriver extends CodeceptionModule implements
      *
      * @api
      */
-    public function _backupSession(): ?RemoteWebDriver
+    public function _backupSession(): WebDriverInterface
     {
         return $this->webDriver;
     }
@@ -1705,7 +1703,7 @@ class WebDriver extends CodeceptionModule implements
      * @api
      * @param RemoteWebDriver|null $webDriver a specific webdriver session instance
      */
-    public function _closeSession($webDriver = null)
+    public function _closeSession($webDriver = null): void
     {
         if (!$webDriver && $this->webDriver) {
             $webDriver = $this->webDriver;
@@ -1923,7 +1921,7 @@ class WebDriver extends CodeceptionModule implements
         sleep($delay);
     }
 
-    public function attachFile($field, $filename)
+    public function attachFile($field, string $filename): void
     {
         $el = $this->findField($field);
         // in order to be compatible on different OS
@@ -1964,7 +1962,7 @@ class WebDriver extends CodeceptionModule implements
         return '';
     }
 
-    public function grabTextFrom($cssOrXPathOrRegex)
+    public function grabTextFrom($cssOrXPathOrRegex): mixed
     {
         $els = $this->match($this->getBaseElement(), $cssOrXPathOrRegex, false);
         if ($els !== []) {
@@ -2026,7 +2024,7 @@ class WebDriver extends CodeceptionModule implements
         return $els;
     }
 
-    public function seeElement($selector, $attributes = [])
+    public function seeElement($selector, array $attributes = []): void
     {
         $this->enableImplicitWait();
         $els = $this->matchVisible($selector);
@@ -2035,7 +2033,7 @@ class WebDriver extends CodeceptionModule implements
         $this->assertNotEmpty($els);
     }
 
-    public function dontSeeElement($selector, $attributes = [])
+    public function dontSeeElement($selector, array $attributes = []): void
     {
         $els = $this->matchVisible($selector);
         $els = $this->filterByAttributes($els, $attributes);
@@ -2074,7 +2072,7 @@ class WebDriver extends CodeceptionModule implements
         $this->assertEmpty($els);
     }
 
-    public function seeNumberOfElements($selector, $expected)
+    public function seeNumberOfElements($selector, $expected): void
     {
         $counted = count($this->matchVisible($selector));
         if (is_array($expected)) {
