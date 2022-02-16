@@ -94,8 +94,8 @@ use PHPUnit\Framework\SelfDescribing;
  *       - WebDriver:
  *          url: 'http://localhost/'
  *          browser: chrome
- *            capabilities:
- *              chromeOptions:
+ *          capabilities:
+ *             chromeOptions:
  *                args: ["--headless", "--disable-gpu"]
  * ```
  * 
