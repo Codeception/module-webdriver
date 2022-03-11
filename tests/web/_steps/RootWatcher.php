@@ -1,4 +1,5 @@
 <?php
+
 namespace WebGuy\Steps;
 
 class RootWatcher extends \WebGuy

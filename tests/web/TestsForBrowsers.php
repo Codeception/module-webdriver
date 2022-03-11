@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-require_once 'TestsForWeb.php';
+namespace Tests\Web;
 
 /**
  * Author: davert

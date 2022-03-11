@@ -2,20 +2,19 @@
 
 declare(strict_types=1);
 
-use Codeception\PHPUnit\Constraint\WebDriverNot;
+namespace Tests\Unit\Codeception\Constraints;
+
+use Codeception\Constraint\WebDriverNot;
 use Codeception\PHPUnit\TestCase;
 use Codeception\Util\Locator;
 
-require_once __DIR__.'/mocked_webelement.php';
-
 class WebDriverConstraintNotTest extends TestCase
 {
-
     protected ?WebDriverNot $constraint = null;
 
     public function _setUp()
     {
-        $this->constraint = new Codeception\PHPUnit\Constraint\WebDriverNot('warcraft', '/user');
+        $this->constraint = new WebDriverNot('warcraft', '/user');
     }
 
     public function testEvaluation()
@@ -70,7 +69,7 @@ class WebDriverConstraintNotTest extends TestCase
 
     public function testFailMessageResponseWithoutUrl()
     {
-        $this->constraint = new Codeception\PHPUnit\Constraint\WebDriverNot('warcraft');
+        $this->constraint = new WebDriverNot('warcraft');
         $nodes = array(new TestedWebElement('Bye warcraft'), new TestedWebElement('Bye world'));
         try {
             $this->constraint->evaluate($nodes, 'selector');

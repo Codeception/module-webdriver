@@ -1,0 +1,43 @@
+name: Static analysis
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  phpcs:
+    name: Code style
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+          ini-values: memory_limit=-1, date.timezone='UTC'
+          tools: phpcs, phpstan
+
+      - name: Validate composer.json
+        run: composer validate
+
+      - name: Install dependencies
+        run: composer update
+
+      - name: Generate action files
+        run: vendor/bin/codecept build
+
+      - name: Check production code style
+        run: phpcs src/
+
+      - name: Check test code style
+        run: phpcs tests/ --standard=tests/phpcs.xml
+
+      - name: Static analysis of production code
+        run: phpstan analyze src/ --level=1
+
+      - name: Static analysis of test code
+        run: phpstan analyze tests/

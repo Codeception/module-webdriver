@@ -1,7 +1,11 @@
 <?php
+
+namespace Tests\Unit\Codeception\Constraints;
+
+use Facebook\WebDriver\Remote\RemoteWebElement;
+
 class TestedWebElement extends RemoteWebElement
 {
-
     protected $value;
 
     public function __construct($value)

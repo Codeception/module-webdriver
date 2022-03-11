@@ -2,9 +2,12 @@
 
 declare(strict_types=1);
 
+namespace Tests\Web;
+
 use Codeception\Module\WebDriver;
 use Codeception\Test\Unit;
 use Codeception\Util\ActionSequence;
+use data;
 
 /**
  * Author: davert

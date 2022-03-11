@@ -1,6 +1,5 @@
 <?php
 
-
 /**
  * Inherited Methods
  * @method void wantToTest($text)
@@ -20,7 +19,8 @@ class WebGuy extends \Codeception\Actor
 {
     use _generated\WebGuyActions;
 
-    use \Codeception\Lib\Actor\Shared\Friend; 
+    use \Codeception\Lib\Actor\Shared\Friend;
+
    /**
     * Define custom actions here
     */
