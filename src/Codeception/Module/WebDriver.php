@@ -23,7 +23,7 @@ use Codeception\Lib\Interfaces\ScreenshotSaver;
 use Codeception\Lib\Interfaces\SessionSnapshot;
 use Codeception\Lib\Interfaces\Web as WebInterface;
 use Codeception\Module as CodeceptionModule;
-use Codeception\PHPUnit\Constraint\Page as PageConstraint;
+use Codeception\Constraint\Page as PageConstraint;
 use Codeception\Constraint\WebDriver as WebDriverConstraint;
 use Codeception\Constraint\WebDriverNot as WebDriverConstraintNot;
 use Codeception\Test\Descriptor;
