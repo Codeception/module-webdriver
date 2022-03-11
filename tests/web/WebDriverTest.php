@@ -8,6 +8,7 @@ use Codeception\Module\WebDriver;
 use Codeception\Stub;
 use Codeception\Stub\Expected;
 use Codeception\Util\Maybe;
+use data;
 use Facebook\WebDriver\Cookie;
 use Facebook\WebDriver\Remote\DesiredCapabilities;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -580,7 +581,7 @@ final class WebDriverTest extends TestsForBrowsers
             ]),
         ]);
         $module = Stub::make(self::MODULE_CLASS, ['webDriver' => $fakeWd]);
-        $cest = new \Codeception\Test\Cest(new stdClass(), 'login', 'someCest.php');
+        $cest = new \Codeception\Test\Cest(new \stdClass(), 'login', 'someCest.php');
         $module->_failed($cest, new \PHPUnit\Framework\AssertionFailedError());
     }
 

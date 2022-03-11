@@ -37,7 +37,10 @@
         "classmap": [
             "tests/data/app/data.php",
             "tests/unit/Codeception/Constraints/TestedWebElement.php"
-        ]
+        ],
+        "psr-4": {
+            "Tests\\Web\\": "tests/web/"
+        }
     },
     "config": {
         "classmap-authoritative": true

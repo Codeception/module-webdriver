@@ -984,7 +984,7 @@ class WebDriver extends CodeceptionModule implements
         $result = [];
         $cookies = $this->webDriver->manage()->getCookies();
         foreach ($cookies as $cookie) {
-            $result[] = is_array($cookie) ? $cookie : $cookie->toArray();
+            $result[] = $cookie->toArray();
         }
 
         $this->debugSection('Cookies', json_encode($result, JSON_THROW_ON_ERROR));
@@ -1228,7 +1228,7 @@ class WebDriver extends CodeceptionModule implements
             return $this->matchFirstOrFail($page, $link);
         }
 
-        $locator = static::xPathLiteral(trim((string) $link));
+        $locator = self::xPathLiteral(trim((string) $link));
 
         // narrow
         $xpath = Locator::combine(
@@ -1281,7 +1281,7 @@ class WebDriver extends CodeceptionModule implements
             return $fields;
         }
 
-        $locator = static::xPathLiteral(trim((string) $selector));
+        $locator = self::xPathLiteral(trim((string) $selector));
         // by text or label
         $xpath = Locator::combine(
             ".//*[self::input | self::textarea | self::select][not(./@type = 'submit' or ./@type = 'image' or ./@type = 'hidden')][(((./@name = {$locator}) or ./@id = //label[contains(normalize-space(string(.)), {$locator})]/@for) or ./@placeholder = {$locator})]",
@@ -1354,7 +1354,7 @@ class WebDriver extends CodeceptionModule implements
         }
     }
 
-    private function filterNodesByHref(string $url, array $nodes): ?array
+    private function filterNodesByHref(string $url, array $nodes): array
     {
         //current uri can be relative, merging it with configured base url gives absolute url
         $absoluteCurrentUrl = Uri::mergeUrls($this->_getUrl(), $this->_getCurrentUri());
@@ -1802,15 +1802,15 @@ class WebDriver extends CodeceptionModule implements
             return $this->matchFirstOrFail($this->getBaseElement(), $radioOrCheckbox);
         }
 
-        $locator = static::xPathLiteral($radioOrCheckbox);
+        $locator = self::xPathLiteral($radioOrCheckbox);
         if ($context instanceof WebDriverElement && $context->getTagName() === 'input') {
             $contextType = $context->getAttribute('type');
             if (!in_array($contextType, ['checkbox', 'radio'], true)) {
                 return null;
             }
 
-            $nameLiteral = static::xPathLiteral($context->getAttribute('name'));
-            $typeLiteral = static::xPathLiteral($contextType);
+            $nameLiteral = self::xPathLiteral($context->getAttribute('name'));
+            $typeLiteral = self::xPathLiteral($contextType);
             $inputLocatorFragment = "input[@type = {$typeLiteral}][@name = {$nameLiteral}]";
             $xpath = Locator::combine(
                 "ancestor::form//{$inputLocatorFragment}[(@id = ancestor::form//label[contains(normalize-space(string(.)), {$locator})]/@for) or @placeholder = {$locator}]",
@@ -2221,11 +2221,9 @@ class WebDriver extends CodeceptionModule implements
      * Checks that the active JavaScript popup,
      * as created by `window.alert`|`window.confirm`|`window.prompt`, contains the given string.
      *
-     * @param $text
-     *
      * @throws ModuleException
      */
-    public function seeInPopup($text): void
+    public function seeInPopup(string $text): void
     {
         if ($this->isPhantom()) {
             throw new ModuleException($this, 'PhantomJS does not support working with popups');
@@ -2264,10 +2262,9 @@ class WebDriver extends CodeceptionModule implements
     /**
      * Enters text into a native JavaScript prompt popup, as created by `window.prompt`.
      *
-     * @param $keys
      * @throws ModuleException
      */
-    public function typeInPopup($keys): void
+    public function typeInPopup(string $keys): void
     {
         if ($this->isPhantom()) {
             throw new ModuleException($this, 'PhantomJS does not support working with popups');
@@ -2883,11 +2880,10 @@ class WebDriver extends CodeceptionModule implements
      * $I->executeJS("window.alert(arguments[0])", ['Hello world']);
      * ```
      *
-     * @param $script
      * @param array $arguments
      * @return mixed
      */
-    public function executeJS($script, array $arguments = [])
+    public function executeJS(string $script, array $arguments = [])
     {
         return $this->webDriver->executeScript($script, $arguments);
     }
@@ -2906,11 +2902,10 @@ class WebDriver extends CodeceptionModule implements
      * $I->executeAsyncJS('setTimeout(arguments[1], arguments[0])', [$seconds]);
      * ```
      *
-     * @param $script
      * @param array $arguments
      * @return mixed
      */
-    public function executeAsyncJS($script, array $arguments = [])
+    public function executeAsyncJS(string $script, array $arguments = [])
     {
         return $this->webDriver->executeAsyncScript($script, $arguments);
     }
@@ -2934,7 +2929,7 @@ class WebDriver extends CodeceptionModule implements
      * @param string|array|WebDriverBy $source (CSS ID or XPath)
      * @param string|array|WebDriverBy $target (CSS ID or XPath)
      */
-    public function dragAndDrop(string $source, string $target): void
+    public function dragAndDrop($source, $target): void
     {
         $sourceNodes = $this->matchFirstOrFail($this->getBaseElement(), $source);
         $targetNodes = $this->matchFirstOrFail($this->getBaseElement(), $target);
@@ -3123,7 +3118,7 @@ class WebDriver extends CodeceptionModule implements
                 return WebDriverBy::className($locator);
             default:
                 throw new MalformedLocatorException(
-                    "{$by} => {$locator}",
+                    "{$type} => {$locator}",
                     "Strict locator can be either xpath, css, id, link, class, name: "
                 );
         }
@@ -3440,10 +3435,8 @@ class WebDriver extends CodeceptionModule implements
      * Check if the cookie domain matches the config URL.
      *
      * Taken from Guzzle\Cookie\SetCookie
-     *
-     * @param array|WebDriverCookie $cookie
      */
-    private function cookieDomainMatchesConfigUrl(WebDriverCookie $cookie): bool
+    private function cookieDomainMatchesConfigUrl(array|WebDriverCookie $cookie): bool
     {
         if (!isset($cookie['domain'])) {
             return true;
@@ -3517,11 +3510,10 @@ class WebDriver extends CodeceptionModule implements
      * <?php
      * $I->seeNumberOfTabs(2);
      * ```
-     * @param $number number of tabs
      */
-    public function seeNumberOfTabs($number): void
+    public function seeNumberOfTabs(int $number): void
     {
-        $this->assertSame(count($this->webDriver->getWindowHandles()), $number);
+        $this->assertCount($number, $this->webDriver->getWindowHandles());
     }
 
     /**
@@ -3692,13 +3684,13 @@ class WebDriver extends CodeceptionModule implements
      *
      *  Examples:
      *
-     *     echo static::xpathLiteral('foo " bar');
+     *     echo self::xPathLiteral('foo " bar');
      *     //prints 'foo " bar'
      *
-     *     echo static::xpathLiteral("foo ' bar");
+     *     echo self::xPathLiteral("foo ' bar");
      *     //prints "foo ' bar"
      *
-     *     echo static::xpathLiteral('a\'b"c');
+     *     echo self::xPathLiteral('a\'b"c');
      *     //prints concat('a', "'", 'b"c')
      *
      * @return string Converted string
