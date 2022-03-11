@@ -6,7 +6,6 @@ namespace Codeception\Constraint;
 
 use Codeception\Exception\ElementNotFound;
 use Codeception\Lib\Console\Message;
-use Codeception\PHPUnit\Constraint\Page;
 use Codeception\Util\Locator;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverElement;
