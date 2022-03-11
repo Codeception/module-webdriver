@@ -2,6 +2,8 @@
 
 declare(strict_types=1);
 
+namespace Tests\Web;
+
 use Codeception\Module\WebDriver;
 use Codeception\Stub;
 use Codeception\Stub\Expected;
@@ -12,9 +14,6 @@ use Facebook\WebDriver\Remote\RemoteWebDriver;
 use Facebook\WebDriver\WebDriverBy;
 use Facebook\WebDriver\WebDriverKeys;
 use PHPUnit\Framework\Assert;
-
-require_once codecept_data_dir() . 'app/data.php';
-require_once __DIR__ . '/../unit/Codeception/Module/TestsForBrowsers.php';
 
 final class WebDriverTest extends TestsForBrowsers
 {
@@ -125,42 +124,42 @@ final class WebDriverTest extends TestsForBrowsers
     public function testScreenshot()
     {
         $this->module->amOnPage('/');
-        @unlink(\Codeception\Configuration::outputDir().'testshot.png');
-        $testName="debugTest";
+        @unlink(\Codeception\Configuration::outputDir() . 'testshot.png');
+        $testName = "debugTest";
 
         $this->module->makeScreenshot($testName);
-        $this->assertFileExists(\Codeception\Configuration::outputDir().'debug/'.$testName.'.png');
-        @unlink(\Codeception\Configuration::outputDir().'debug/'.$testName.'.png');
+        $this->assertFileExists(\Codeception\Configuration::outputDir() . 'debug/' . $testName . '.png');
+        @unlink(\Codeception\Configuration::outputDir() . 'debug/' . $testName . '.png');
 
-        $this->module->_saveScreenshot(\Codeception\Configuration::outputDir().'testshot.png');
-        $this->assertFileExists(\Codeception\Configuration::outputDir().'testshot.png');
-        @unlink(\Codeception\Configuration::outputDir().'testshot.png');
+        $this->module->_saveScreenshot(\Codeception\Configuration::outputDir() . 'testshot.png');
+        $this->assertFileExists(\Codeception\Configuration::outputDir() . 'testshot.png');
+        @unlink(\Codeception\Configuration::outputDir() . 'testshot.png');
     }
 
     public function testElementScreenshot()
     {
         $this->module->amOnPage('/');
-        @unlink(\Codeception\Configuration::outputDir().'testelementshot.png');
-        $testName="debugTestElement";
+        @unlink(\Codeception\Configuration::outputDir() . 'testelementshot.png');
+        $testName = "debugTestElement";
 
         $this->module->makeElementScreenshot('#area4', $testName);
-        $this->assertFileExists(\Codeception\Configuration::outputDir().'debug/'.$testName.'.png');
-        @unlink(\Codeception\Configuration::outputDir().'debug/'.$testName.'.png');
+        $this->assertFileExists(\Codeception\Configuration::outputDir() . 'debug/' . $testName . '.png');
+        @unlink(\Codeception\Configuration::outputDir() . 'debug/' . $testName . '.png');
 
-        $this->module->_saveElementScreenshot('#area4', \Codeception\Configuration::outputDir().'testshot.png');
-        $this->assertFileExists(\Codeception\Configuration::outputDir().'testshot.png');
-        @unlink(\Codeception\Configuration::outputDir().'testelementshot.png');
+        $this->module->_saveElementScreenshot('#area4', \Codeception\Configuration::outputDir() . 'testshot.png');
+        $this->assertFileExists(\Codeception\Configuration::outputDir() . 'testshot.png');
+        @unlink(\Codeception\Configuration::outputDir() . 'testelementshot.png');
     }
 
     public function testSnapshot()
     {
         $this->module->amOnPage('/');
-        @unlink(\Codeception\Configuration::outputDir().'testshot.png');
-        $testName="debugTest";
+        @unlink(\Codeception\Configuration::outputDir() . 'testshot.png');
+        $testName = "debugTest";
 
         $this->module->makeHtmlSnapshot($testName);
-        $this->assertFileExists(\Codeception\Configuration::outputDir().'debug/'.$testName.'.html');
-        @unlink(\Codeception\Configuration::outputDir().'debug/'.$testName.'.html');
+        $this->assertFileExists(\Codeception\Configuration::outputDir() . 'debug/' . $testName . '.html');
+        @unlink(\Codeception\Configuration::outputDir() . 'debug/' . $testName . '.html');
     }
 
     /**
@@ -329,7 +328,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->amOnPage('/');
         $time = time();
         $this->module->wait(3);
-        $this->assertGreaterThanOrEqual($time+3, time());
+        $this->assertGreaterThanOrEqual($time + 3, time());
     }
 
 
@@ -402,7 +401,6 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->click('Submit');
         $form = data::get('form');
         $this->assertSame('Hello world', $form['name']);
-
     }
 
     public function testAppendFieldTextFails()
@@ -592,7 +590,7 @@ final class WebDriverTest extends TestsForBrowsers
         $fakeWd = Stub::make(self::WEBDRIVER_CLASS, [
             'takeScreenshot' => Expected::once(function ($filename) use ($test) {
                 Assert::assertSame(
-                    codecept_log_dir(get_class($test).'.testLogin.fail.png'),
+                    codecept_log_dir(get_class($test) . '.testLogin.fail.png'),
                     $filename
                 );
             }),
@@ -693,7 +691,7 @@ final class WebDriverTest extends TestsForBrowsers
     public function testBug2046()
     {
         $this->module->webDriver = null;
-        $this->module->_saveScreenshot(\Codeception\Configuration::outputDir().'testshot.png');
+        $this->module->_saveScreenshot(\Codeception\Configuration::outputDir() . 'testshot.png');
     }
 
     public function testSessionSnapshots()
@@ -1061,8 +1059,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->performOn('.rememberMe', \Codeception\Util\ActionSequence::build()
             ->see('Remember me next time')
             ->seeElement('#LoginForm_rememberMe')
-            ->dontSee('Login')
-        );
+            ->dontSee('Login'));
         $this->assertSame(3, Assert::getCount() - $asserts);
         $this->module->see('Login');
     }
@@ -1074,8 +1071,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->performOn('.rememberMe', \Codeception\Util\ActionSequence::build()
             ->see('Remember me')
             ->see('next time')
-            ->dontSee('Login')
-        );
+            ->dontSee('Login'));
         $this->assertSame(3, Assert::getCount() - $asserts);
         $this->module->see('Login');
     }
@@ -1086,8 +1082,7 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->amOnPage('/form/example1');
         $this->module->performOn('.rememberMe', \Codeception\Util\ActionSequence::build()
             ->seeElement('#LoginForm_rememberMe')
-            ->see('Remember me tomorrow')
-        );
+            ->see('Remember me tomorrow'));
     }
 
     public function testPerformOnFail2()
@@ -1110,7 +1105,6 @@ final class WebDriverTest extends TestsForBrowsers
         $this->module->see('Iframe test');
         $this->module->switchToIFrame("//iframe[@name='content']");
         $this->module->see('Lots of valuable data here');
-
     }
 
     /**
@@ -1128,7 +1122,7 @@ final class WebDriverTest extends TestsForBrowsers
     {
         $this->module->amOnPage('/minimal');
         $sourceExpected =
-<<<HTML
+        <<<HTML
 <!DOCTYPE html>
 <html>
     <head>
@@ -1156,7 +1150,7 @@ HTML
         $this->notForPhantomJS();
         $this->assertNotTrue($this->module->webDriver->getCapabilities()->getCapability('acceptInsecureCerts'));
         $this->module->_closeSession();
-        $this->module->_capabilities(function($current) {
+        $this->module->_capabilities(function ($current) {
             $current['acceptInsecureCerts'] = true;
             return new DesiredCapabilities($current);
         });

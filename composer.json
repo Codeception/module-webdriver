@@ -33,6 +33,12 @@
     "autoload":{
         "classmap": ["src/"]
     },
+    "autoload-dev": {
+        "classmap": [
+            "tests/data/app/data.php",
+            "tests/unit/Codeception/Constraints/TestedWebElement.php"
+        ]
+    },
     "config": {
         "classmap-authoritative": true
     }

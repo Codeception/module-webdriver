@@ -54,7 +54,7 @@ class WebDriver extends Page
         }
 
         $output = "Failed asserting that any element by " . Locator::humanReadableString($selector);
-        $output .= $this->uriMessage('on page');
+        $output .= ' ' . $this->uriMessage('on page');
 
         if (count($nodes) < 5) {
             $output .= "\nElements: ";

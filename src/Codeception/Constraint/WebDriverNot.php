@@ -38,7 +38,7 @@ class WebDriverNot extends WebDriver
         }
 
         $output = "There was {$selector} element";
-        $output .= $this->uriMessage("on page");
+        $output .= ' ' . $this->uriMessage('on page');
         $output .= $this->nodesList($nodes, $this->string);
         $output .= "\ncontaining '{$this->string}'";
 
