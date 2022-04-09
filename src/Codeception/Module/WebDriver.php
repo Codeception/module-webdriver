@@ -1422,7 +1422,7 @@ class WebDriver extends CodeceptionModule implements
         $this->assertTrue($this->findField($checkbox)->isSelected());
     }
 
-    public function dontSeeCheckboxIsChecked(string $checkbox): void
+    public function dontSeeCheckboxIsChecked($checkbox): void
     {
         $this->assertFalse($this->findField($checkbox)->isSelected());
     }
