@@ -28,6 +28,6 @@ See [the module documentation](https://codeception.com/docs/modules/WebDriver).
 
 ## License
 
-`Codeception Module Asserts` is open-sourced software licensed under the [MIT](/LICENSE) License.
+`Codeception Module WebDriver` is open-sourced software licensed under the [MIT](/LICENSE) License.
 
 © Codeception PHP Testing Framework
