@@ -1684,7 +1684,7 @@ class WebDriver extends CodeceptionModule implements
         } catch (WebDriverCurlException $exception) {
             codecept_debug('Curl error: ' . $exception->getMessage());
             throw new ConnectionException(
-                "Can't connect to WebDriver at {$this->wdHost}.'"
+                "Can't connect to WebDriver at {$this->wdHost}."
                 . ' Make sure that ChromeDriver, GeckoDriver or Selenium Server is running.'
             );
         }
