@@ -126,10 +126,10 @@ use PHPUnit\Framework\SelfDescribing;
  * modules:
  *    enabled:
  *       - WebDriver:
- *          url: 'http://localhost/'
- *          window_size: false # disabled in ChromeDriver
- *          port: 9515
  *          browser: chrome
+ *          url: 'http://localhost/'
+ *          window_size: 2000x1000
+ *          port: 9515
  *          capabilities:
  *              chromeOptions:
  *                  args: ["--headless", "--disable-gpu"] # Run Chrome in headless mode
@@ -150,8 +150,9 @@ use PHPUnit\Framework\SelfDescribing;
  * modules:
  *    enabled:
  *       - WebDriver:
- *          url: 'http://localhost/'
  *          browser: firefox
+ *          url: 'http://localhost/'
+ *          window_size: 2000x1000
  *          path: ''
  *          capabilities:
  *              acceptInsecureCerts: true # allow self-signed certificates
