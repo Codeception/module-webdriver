@@ -2195,7 +2195,7 @@ class WebDriver extends CodeceptionModule implements
     /**
      * Accepts the active JavaScript native popup window, as created by `window.alert`|`window.confirm`|`window.prompt`.
      * Don't confuse popups with modal windows,
-     * as created by [various libraries](http://jster.net/category/windows-modals-popups).
+     * as created by [various libraries](https://jster.net/category/windows-modals-popups).
      */
     public function acceptPopup(): void
     {
@@ -3446,7 +3446,7 @@ class WebDriver extends CodeceptionModule implements
         $domain = parse_url($this->config['url'], PHP_URL_HOST);
 
         // Remove the leading '.' as per spec in RFC 6265.
-        // http://tools.ietf.org/html/rfc6265#section-5.2.3
+        // https://tools.ietf.org/html/rfc6265#section-5.2.3
         $cookieDomain = ltrim($cookie['domain'], '.');
         // Domain not set or exact match.
         if (!$cookieDomain || !strcasecmp($domain, $cookieDomain)) {
@@ -3454,7 +3454,7 @@ class WebDriver extends CodeceptionModule implements
         }
 
         // Matching the subdomain according to RFC 6265.
-        // http://tools.ietf.org/html/rfc6265#section-5.1.3
+        // https://tools.ietf.org/html/rfc6265#section-5.1.3
         if (filter_var($domain, FILTER_VALIDATE_IP)) {
             return false;
         }
