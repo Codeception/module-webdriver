@@ -698,7 +698,7 @@ class WebDriver extends CodeceptionModule implements
 
         foreach ($logEntries as $logEntry) {
             // Timestamp is in milliseconds, but date() requires seconds.
-            $time = date('H:i:s', $logEntry['timestamp'] / 1000) .
+            $time = date('H:i:s', intval($logEntry['timestamp'] / 1000)) .
                 // Append the milliseconds to the end of the time string
                 '.' . ($logEntry['timestamp'] % 1000);
             $formattedLogs .= "{$time} {$logEntry['level']} - {$logEntry['message']}\n";
@@ -718,7 +718,7 @@ class WebDriver extends CodeceptionModule implements
                 && $this->isJSError($logEntry['level'], $logEntry['message'])
             ) {
                 // Timestamp is in milliseconds, but date() requires seconds.
-                $time = date('H:i:s', $logEntry['timestamp'] / 1000) .
+                $time = date('H:i:s', intval($logEntry['timestamp'] / 1000)) .
                     // Append the milliseconds to the end of the time string
                     '.' . ($logEntry['timestamp'] % 1000);
                 $test->getScenario()->comment("{$time} {$logEntry['level']} - {$logEntry['message']}");
