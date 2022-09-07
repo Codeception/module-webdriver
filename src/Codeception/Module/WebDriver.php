@@ -106,7 +106,7 @@ use PHPUnit\Framework\SelfDescribing;
  * Running tests inside Docker is as easy as pulling [official selenium image](https://github.com/SeleniumHQ/docker-selenium) and starting a container with Chrome:
  *
  * ```
- * docker run --net=host selenium/standalone-chrome
+ * docker run --net=host --shm-size 2g selenium/standalone-chrome
  * ```
  *
  * By using `--net=host` allow Selenium to access local websites.
