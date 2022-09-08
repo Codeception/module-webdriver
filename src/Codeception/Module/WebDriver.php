@@ -3527,9 +3527,12 @@ class WebDriver extends CodeceptionModule implements
      */
     public function closeTab(): void
     {
+        $currentTab = $this->webDriver->getWindowHandle();
         $prevTab = $this->getRelativeTabHandle(-1);
         $this->webDriver->close();
-        $this->webDriver->switchTo()->window($prevTab);
+        if ($prevTab !== $currentTab) {
+            $this->webDriver->switchTo()->window($prevTab);
+        }
     }
 
     /**
