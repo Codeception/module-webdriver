@@ -3529,10 +3529,11 @@ class WebDriver extends CodeceptionModule implements
     {
         $currentTab = $this->webDriver->getWindowHandle();
         $prevTab = $this->getRelativeTabHandle(-1);
-        $this->webDriver->close();
-        if ($prevTab !== $currentTab) {
-            $this->webDriver->switchTo()->window($prevTab);
+        if ($prevTab === $currentTab) {
+            throw new ModuleException($this, 'Will not close the last open tab');
         }
+        $this->webDriver->close();
+        $this->webDriver->switchTo()->window($prevTab);
     }
 
     /**
