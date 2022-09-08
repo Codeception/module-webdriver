@@ -1039,7 +1039,6 @@ class WebDriverTest extends TestsForBrowsers
         $this->module->closeTab();
         $this->module->seeNumberOfTabs(2);
         $this->module->closeTab();
-        $this->module->closeTab();
     }
 
     public function testPerformOnWithArray()
