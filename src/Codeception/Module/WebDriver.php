@@ -229,7 +229,7 @@ use PHPUnit\Framework\SelfDescribing;
                   platformName: 'Windows 10'
                   browserVersion: 'latest-5'
                   browserName: 'Chrome'
-                  tunnel:true #for Local testing
+                  tunnel: true #for Local testing
  * ```
  *
  * ### TestingBot
