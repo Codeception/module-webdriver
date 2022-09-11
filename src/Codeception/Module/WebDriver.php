@@ -211,27 +211,25 @@ use PHPUnit\Framework\SelfDescribing;
  *
  * ### LambdaTest
  *
- * 1. Create an account at [LambdaTest](https://www.lambdatest.com/) to get your username and access key
+ * 1. Create an account at [LambdaTest](https://www.lambdatest.com) to get your username and access key
  * 2. In the module configuration use the format `username`:`access key`@hub.lambdatest.com' for `host`
- * 3. Configure `os` and `os_version` under `capabilities` to define the operating System
- * 4. If your site is available only locally or via VPN you should use a tunnel app. In this case add capabilities.setCapability("tunnel",true);.
+ * 3. Configure `platformName`, 'browserVersion', and 'browserName' under `LT:Options` to define test environments.
+ * 4. If your website is available only locally or via VPN you should use LambdaTest tunnel. In this case, you can add capability "tunnel":true;.
  *
  * ```yaml
  *    modules:
  *  enabled:
  *    - WebDriver:
- *       url: http://mysite.com
- *       host: '<username>:<access key>@hub.lambdatest.com'
- *       build: <your build name>
- *       name: <your test name>
- *       port: 80
- *       browser: chrome
- *       capabilities:
- *           os: Windows
- *           os_version: 10
- *           browser_version: 86
- *           resolution: 1366x768
- *           tunnel: true # for local testing
+              url: "https://openclassrooms.com"
+              host: 'hub.lambdatest.com'
+              port: 80
+              browser: 'Chrome'
+              capabilities:
+                 LT:Options:  
+                  platformName: 'Windows 10'
+                  browserVersion: 'latest-5'
+                  browserName: 'Chrome'
+                  tunnel: true #for Local testing
  * ```
  *
  * ### TestingBot
