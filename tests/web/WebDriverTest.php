@@ -7,6 +7,7 @@ namespace Tests\Web;
 use Codeception\Module\WebDriver;
 use Codeception\Stub;
 use Codeception\Stub\Expected;
+use Codeception\Test\Metadata;
 use Codeception\Util\Maybe;
 use data;
 use Facebook\WebDriver\Cookie;
@@ -581,13 +582,27 @@ final class WebDriverTest extends TestsForBrowsers
             ]),
         ]);
         $module = Stub::make(self::MODULE_CLASS, ['webDriver' => $fakeWd]);
-        $cest = new \Codeception\Test\Cest(new \stdClass(), 'login', 'someCest.php');
+        $cest = new \Codeception\Test\Cest(
+            new class {
+                public function login()
+                {
+                }
+            },
+            'login',
+            'someCest.php',
+        );
         $module->_failed($cest, new \PHPUnit\Framework\AssertionFailedError());
     }
 
     public function testCreateTestScreenshotOnFail()
     {
-        $test = Stub::make(\Codeception\Test\Unit::class, ['getName' => 'testLogin']);
+        $test = Stub::make(
+            \Codeception\Test\TestCaseWrapper::class,
+            [
+                'getSignature' => 'testLogin',
+                'getMetadata' => new Metadata(),
+            ]
+        );
         $fakeWd = Stub::make(self::WEBDRIVER_CLASS, [
             'takeScreenshot' => Expected::once(function ($filename) use ($test) {
                 Assert::assertSame(

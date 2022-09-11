@@ -150,7 +150,7 @@ abstract class TestsForWeb extends Unit
     public function testSeeLinkFailsIfHrefDoesNotMatchExactly()
     {
         $this->expectException('PHPUnit\Framework\AssertionFailedError');
-        $this->expectExceptionMessage("No links containing text 'Next' and URL 'http://codeception' were found in page /external_url");
+        $this->expectExceptionMessage("No links containing text 'Next' and URL 'https://codeception' were found in page /external_url");
         $this->module->amOnPage('/external_url');
         $this->module->seeLink('Next', 'https://codeception');
     }
