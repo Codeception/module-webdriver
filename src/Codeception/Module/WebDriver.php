@@ -225,7 +225,7 @@ use PHPUnit\Framework\SelfDescribing;
               port: 80
               browser: 'Chrome'
               capabilities:
-                 LT:Options:  
+                 LT:Options:
                   platformName: 'Windows 10'
                   browserVersion: 'latest-5'
                   browserName: 'Chrome'
