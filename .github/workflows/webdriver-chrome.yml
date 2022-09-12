@@ -2,9 +2,9 @@ name: Chrome Tests
 
 on:
   push:
-    branches: [ master ]
+    branches: [ "2.0" ]
   pull_request:
-    branches: [ master ]
+    branches: [ "2.0" ]
 
 jobs:
   build:
