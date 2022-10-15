@@ -989,25 +989,29 @@ class WebDriver extends CodeceptionModule implements
         $this->debugSection('Cookies', json_encode($result, JSON_THROW_ON_ERROR));
     }
 
-    public function seeCookie($cookie, array $params = []): void
+    public function seeCookie($cookie, array $params = [], bool $showDebug = true): void
     {
         $cookies = $this->filterCookies($this->webDriver->manage()->getCookies(), $params);
         $cookies = array_map(
             fn($c) => $c['name'],
             $cookies
         );
-        $this->debugCookies();
+        if ($showDebug) {
+            $this->debugCookies();
+        }
         $this->assertContains($cookie, $cookies);
     }
 
-    public function dontSeeCookie($cookie, array $params = []): void
+    public function dontSeeCookie($cookie, array $params = [], bool $showDebug = true): void
     {
         $cookies = $this->filterCookies($this->webDriver->manage()->getCookies(), $params);
         $cookies = array_map(
             fn($c) => $c['name'],
             $cookies
         );
-        $this->debugCookies();
+        if ($showDebug) {
+            $this->debugCookies();
+        }
         $this->assertNotContains($cookie, $cookies);
     }
 
@@ -1038,10 +1042,12 @@ class WebDriver extends CodeceptionModule implements
         }
     }
 
-    public function resetCookie($cookie, array $params = []): void
+    public function resetCookie($cookie, array $params = [], bool $showDebug = true): void
     {
         $this->webDriver->manage()->deleteCookieNamed($cookie);
-        $this->debugCookies();
+        if ($showDebug) {
+            $this->debugCookies();
+        }
     }
 
     public function grabCookie($cookie, array $params = []): mixed
@@ -3398,7 +3404,7 @@ class WebDriver extends CodeceptionModule implements
         $this->debugSection('Snapshot', sprintf('Saved "%s" session snapshot', $name));
     }
 
-    public function loadSessionSnapshot($name): bool
+    public function loadSessionSnapshot($name, bool $showDebug = true): bool
     {
         if (!isset($this->sessionSnapshots[$name])) {
             return false;
@@ -3416,7 +3422,9 @@ class WebDriver extends CodeceptionModule implements
             $this->setCookie($cookie['name'], $cookie['value'], (array)$cookie, false);
         }
 
-        $this->debugCookies();
+        if ($showDebug) {
+            $this->debugCookies();
+        }
         $this->debugSection('Snapshot', sprintf('Restored "%s" session snapshot', $name));
         return true;
     }
