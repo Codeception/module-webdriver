@@ -19,6 +19,7 @@ class WebDriverTest extends \Codeception\Test\Unit
             [
                 'getSignature' => 'testLogin',
                 'getMetadata' => new Metadata(),
+                'getScenario' => null,
             ]
         );
         $fakeWd = Stub::make(self::WEBDRIVER_CLASS, [
@@ -37,8 +38,6 @@ class WebDriverTest extends \Codeception\Test\Unit
         $module = Stub::make(self::MODULE_CLASS, ['webDriver' => $fakeWd]);
         $module->_failed($test, new \PHPUnit\Framework\AssertionFailedError());
     }
-
-
 
     public function testCreateCestScreenshotOnFail()
     {
