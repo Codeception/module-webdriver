@@ -1,6 +1,6 @@
 paths:
     tests: tests
-    output: tests/outputs
+    output: tests/output
     data: tests/data
     support: tests/support
     envs: tests/envs
