@@ -22,7 +22,7 @@
         "php": "^8.1",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "codeception/codeception": "dev-phpunit10 as 5.0.8",
+        "codeception/codeception": "^5.0.8",
         "codeception/lib-web": "^1.0.1",
         "codeception/stub": "^4.0",
         "php-webdriver/webdriver": "^1.8.0",
