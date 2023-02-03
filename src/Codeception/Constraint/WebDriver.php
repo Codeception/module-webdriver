@@ -47,7 +47,7 @@ class WebDriver extends Page
      * @param string|array|WebDriverBy $selector
      * @param ComparisonFailure|null $comparisonFailure
      */
-    protected function fail($nodes, $selector, ComparisonFailure $comparisonFailure = null): void
+    protected function fail($nodes, $selector, ComparisonFailure $comparisonFailure = null): never
     {
         if (count($nodes) === 0) {
             throw new ElementNotFound($selector, 'Element located either by name, CSS or XPath');
