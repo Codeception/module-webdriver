@@ -3154,11 +3154,11 @@ class WebDriver extends CodeceptionModule implements
      * ``` php
      * <?php
      * // <input id="page" value="old" />
-     * $I->pressKey('#page','a'); // => olda
-     * $I->pressKey('#page',array('ctrl','a'),'new'); //=> new
-     * $I->pressKey('#page',array('shift','111'),'1','x'); //=> old!!!1x
+     * $I->pressKey('#page', 'a'); // => olda
+     * $I->pressKey('#page', ['ctrl', 'a'],'new'); //=> new
+     * $I->pressKey('#page', ['shift', '111'],'1','x'); //=> old!!!1x
      * $I->pressKey('descendant-or-self::*[@id='page']','u'); //=> oldu
-     * $I->pressKey('#name', array('ctrl', 'a'), \Facebook\WebDriver\WebDriverKeys::DELETE); //=>''
+     * $I->pressKey('#name', ['ctrl', 'a'], \Facebook\WebDriver\WebDriverKeys::DELETE); //=>''
      * ```
      *
      * @param string|array|WebDriverBy $element
