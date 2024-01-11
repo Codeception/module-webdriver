@@ -3633,7 +3633,7 @@ class WebDriver extends CodeceptionModule implements
      * In 3rd argument you can set number a seconds to wait for element to appear
      *
      * @param string|array|WebDriverBy $element
-     * @param callable|array|ActionSequence $actions
+     * @param callable|array|\Codeception\Util\ActionSequence $actions
      */
     public function performOn($element, $actions, int $timeout = 10): void
     {
