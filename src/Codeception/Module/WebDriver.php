@@ -2348,17 +2348,17 @@ class WebDriver extends CodeceptionModule implements
      * ``` html
      * <form action="/sign_up">
      *     Login:
-     *     <input type="text" name="user[login]" /><br/>
+     *     <input type="text" name="user[login]"><br>
      *     Password:
-     *     <input type="password" name="user[password]" /><br/>
+     *     <input type="password" name="user[password]"><br>
      *     Do you agree to our terms?
-     *     <input type="checkbox" name="user[agree]" /><br/>
+     *     <input type="checkbox" name="user[agree]"><br>
      *     Select pricing plan:
      *     <select name="plan">
      *         <option value="1">Free</option>
      *         <option value="2" selected="selected">Paid</option>
      *     </select>
-     *     <input type="submit" name="submitButton" value="Submit" />
+     *     <input type="submit" name="submitButton" value="Submit">
      * </form>
      * ```
      *
@@ -2458,7 +2458,7 @@ class WebDriver extends CodeceptionModule implements
      * For example, given the following HTML:
      *
      * ``` html
-     * <input type="submit" name="submitButton" value="Submit" />
+     * <input type="submit" name="submitButton" value="Submit">
      * ```
      *
      * `$button` could be any one of the following:
@@ -3153,7 +3153,7 @@ class WebDriver extends CodeceptionModule implements
      *
      * ``` php
      * <?php
-     * // <input id="page" value="old" />
+     * // <input id="page" value="old">
      * $I->pressKey('#page', 'a'); // => olda
      * $I->pressKey('#page', ['ctrl', 'a'],'new'); //=> new
      * $I->pressKey('#page', ['shift', '111'],'1','x'); //=> old!!!1x
