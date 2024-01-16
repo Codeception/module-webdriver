@@ -2279,7 +2279,9 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Reloads the current page.
+     * Reloads the current page, as if the user would click into the url bar and hit <kbd>enter</kbd>,
+     * i.e. form fields are cleared. If you want to reload and keep the contents of form fields
+     * (i.e. as if the user would press <kbd>F%</kbd>), use `$I->pressKey(['css' => 'body'], \Facebook\WebDriver\WebDriverKeys::F5);`
      */
     public function reloadPage(): void
     {
