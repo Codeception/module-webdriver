@@ -1367,7 +1367,7 @@ class WebDriver extends CodeceptionModule implements
         return array_filter(
             $nodes,
             function (WebDriverElement $e) use ($expectedUrl, $absoluteCurrentUrl): bool {
-                $elementHref = Uri::mergeUrls($absoluteCurrentUrl, $e->getAttribute('href'));
+                $elementHref = Uri::mergeUrls($absoluteCurrentUrl, $e->getAttribute('href') ?? '');
                 return $elementHref === $expectedUrl;
             }
         );
