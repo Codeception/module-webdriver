@@ -97,7 +97,7 @@ use PHPUnit\Framework\SelfDescribing;
  *          browser: chrome
  *          capabilities:
  *             chromeOptions:
- *                args: ["--headless", "--disable-gpu"]
+ *                args: ["--headless"]
  * ```
  *
  * ## Headless Selenium in Docker
@@ -132,7 +132,7 @@ use PHPUnit\Framework\SelfDescribing;
  *          port: 9515
  *          capabilities:
  *              chromeOptions:
- *                  args: ["--headless", "--disable-gpu"] # Run Chrome in headless mode
+ *                  args: ["--headless"] # Run Chrome in headless mode
  *                  prefs:
  *                      download.default_directory: "..."
  * ```
