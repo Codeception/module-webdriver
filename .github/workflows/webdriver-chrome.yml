@@ -12,8 +12,8 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    
+    - uses: actions/checkout@v4
+
     - run: docker run -d --net=host --shm-size=2g selenium/standalone-chrome:3.141.59-oxygen
 
     - name: Validate composer.json and composer.lock
