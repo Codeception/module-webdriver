@@ -16,16 +16,15 @@
             "name": "Zaahid Bateson"
         }
     ],
-    "minimum-stability": "dev",
-
+    "minimum-stability": "stable",
     "require": {
         "php": "^8.0",
         "ext-json": "*",
         "ext-mbstring": "*",
-        "codeception/codeception": "^5.0.0-RC2",
+        "codeception/codeception": "^5.0.0",
         "codeception/lib-web": "^1.0.1",
         "codeception/stub": "^4.0",
-        "php-webdriver/webdriver": "^1.8.0",
+        "php-webdriver/webdriver": "^1.14.0",
         "phpunit/phpunit": "^9.5"
     },
     "suggest": {
