@@ -96,7 +96,7 @@ use PHPUnit\Framework\SelfDescribing;
  *          url: 'http://localhost/'
  *          browser: chrome
  *          capabilities:
- *             chromeOptions:
+ *             goog:chromeOptions:
  *                args: ["--headless"]
  * ```
  *
@@ -131,7 +131,7 @@ use PHPUnit\Framework\SelfDescribing;
  *          window_size: 2000x1000
  *          port: 9515
  *          capabilities:
- *              chromeOptions:
+ *              goog:chromeOptions:
  *                  args: ["--headless"] # Run Chrome in headless mode
  *                  prefs:
  *                      download.default_directory: "..."
@@ -173,7 +173,7 @@ use PHPUnit\Framework\SelfDescribing;
  *
  * 1. Create an account at [SauceLabs.com](https://saucelabs.com/) to get your username and access key
  * 2. In the module configuration use the format `username`:`access_key`@ondemand.saucelabs.com' for `host`
- * 3. Configure `platform` under `capabilities` to define the [Operating System](https://docs.saucelabs.com/basics/platform-configurator/)
+ * 3. Configure `platformName` under `capabilities` to define the [Operating System](https://docs.saucelabs.com/basics/platform-configurator/)
  * 4. run a tunnel app if your site can't be accessed from Internet
  *
  * ```yaml
@@ -185,7 +185,7 @@ use PHPUnit\Framework\SelfDescribing;
  *              port: 80
  *              browser: chrome
  *              capabilities:
- *                  platform: 'Windows 10'
+ *                  platformName: 'Windows 10'
  * ```
  *
  * ### BrowserStack
@@ -204,9 +204,10 @@ use PHPUnit\Framework\SelfDescribing;
  *              port: 80
  *              browser: chrome
  *              capabilities:
- *                  os: Windows
- *                  os_version: 10
- *                  browserstack.local: true # for local testing
+ *                  bstack:options:
+ *                      os: Windows
+ *                      osVersion: 10
+ *                      local: true # for local testing
  * ```
  *
  * ### LambdaTest
@@ -236,7 +237,7 @@ use PHPUnit\Framework\SelfDescribing;
  *
  * 1. Create an account at [TestingBot](https://testingbot.com/) to get your key and secret
  * 2. In the module configuration use the format `key`:`secret`@hub.testingbot.com' for `host`
- * 3. Configure `platform` under `capabilities` to define the [Operating System](https://testingbot.com/support/getting-started/browsers.html)
+ * 3. Configure `platformName` under `capabilities` to define the [Operating System](https://testingbot.com/support/getting-started/browsers.html)
  * 4. Run [TestingBot Tunnel](https://testingbot.com/support/other/tunnel) if your site can't be accessed from Internet
  *
  * ```yaml
@@ -248,7 +249,7 @@ use PHPUnit\Framework\SelfDescribing;
  *              port: 80
  *              browser: chrome
  *              capabilities:
- *                  platform: Windows 10
+ *                  platformName: Windows 10
  * ```
  *
  * ## Configuration
@@ -285,8 +286,9 @@ use PHPUnit\Framework\SelfDescribing;
  *              browser: firefox
  *              window_size: 1024x768
  *              capabilities:
- *                  unexpectedAlertBehaviour: 'accept'
- *                  firefox_profile: '~/firefox-profiles/codeception-profile.zip.b64'
+ *                  unhandledPromptBehaviour: 'accept'
+ *                  moz:firefoxOptions:
+ *                      profile: '~/firefox-profiles/codeception-profile.zip.b64'
  * ```
  *
  * ## Loading Parts from other Modules
