@@ -26,7 +26,7 @@
         "codeception/lib-web": "^1.0.1",
         "codeception/stub": "^4.0",
         "php-webdriver/webdriver": "^1.8.0",
-        "phpunit/phpunit": "^10.0"
+        "phpunit/phpunit": "^10.0 || ^11.0"
     },
     "suggest": {
         "codeception/phpbuiltinserver": "Start and stop PHP built-in web server for your tests"
