@@ -2,9 +2,9 @@ name: Chrome Tests
 
 on:
   push:
-    branches: [ 3.x ]
+    branches: [ debug-failing-test ]
   pull_request:
-    branches: [ 3.x ]
+    branches: [ debug-failing-test ]
 
 jobs:
   build:
