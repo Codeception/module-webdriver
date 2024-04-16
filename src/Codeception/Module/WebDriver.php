@@ -2874,16 +2874,13 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Executes custom JavaScript.
-     *
-     * This example uses jQuery to get a value and assigns that value to a PHP variable:
+     * Executes JavaScript commands.
      *
      * ```php
      * <?php
-     * $myVar = $I->executeJS('return $("#myField").val()');
+     * $myVar = $I->executeJS('return document.getElementById("myField").value');
      *
-     * // additional arguments can be passed as array
-     * // Example shows `Hello World` alert:
+     * // Additional arguments can be passed as array. E.g. this will alert `Hello World`:
      * $I->executeJS("window.alert(arguments[0])", ['Hello world']);
      * ```
      *
