@@ -2556,16 +2556,17 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Waits up to $timeout seconds for the given element to change.
+     * Waits up to `$timeout` seconds for the given element to change.
      * Element "change" is determined by a callback function which is called repeatedly
      * until the return value evaluates to true.
      *
      * ``` php
      * <?php
-     * use \Facebook\WebDriver\WebDriverElement
-     * $I->waitForElementChange('#menu', function(WebDriverElement $el) {
-     *     return $el->isDisplayed();
-     * }, 100);
+     * use Facebook\WebDriver\WebDriverElement;
+     *
+     * $I->waitForElementChange('#menu', function(WebDriverElement $element) {
+     *     return $element->isDisplayed();
+     * }, 5);
      * ```
      *
      * @param string|array|WebDriverBy $element
