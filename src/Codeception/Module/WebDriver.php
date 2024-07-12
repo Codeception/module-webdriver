@@ -39,7 +39,7 @@ use Facebook\WebDriver\Exception\Internal\UnexpectedResponseException;
 use Facebook\WebDriver\Exception\InvalidElementStateException;
 use Facebook\WebDriver\Exception\InvalidSelectorException;
 use Facebook\WebDriver\Exception\NoSuchElementException;
-use Facebook\WebDriver\Exception\UnknownErrorException;
+use Facebook\WebDriver\Exception\PhpWebDriverExceptionInterface;
 use Facebook\WebDriver\Interactions\WebDriverActions;
 use Facebook\WebDriver\Remote\LocalFileDetector;
 use Facebook\WebDriver\Remote\RemoteWebDriver;
@@ -1747,7 +1747,7 @@ class WebDriver extends CodeceptionModule implements
         try {
             $webDriver->quit();
             unset($webDriver);
-        } catch (UnknownErrorException $exception) {
+        } catch (PhpWebDriverExceptionInterface $exception) {
             // Session already closed so nothing to do
         }
     }
