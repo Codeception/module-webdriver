@@ -25,7 +25,7 @@ class WebDriverNot extends WebDriver
      * @param string|array|WebDriverBy $selector
      * @param ComparisonFailure|null $comparisonFailure
      */
-    protected function fail($nodes, $selector, ComparisonFailure $comparisonFailure = null): never
+    protected function fail($nodes, $selector, ?ComparisonFailure $comparisonFailure = null): never
     {
         if (!is_string($selector) || strpos($selector, "'") === false) {
             $selector = Locator::humanReadableString($selector);

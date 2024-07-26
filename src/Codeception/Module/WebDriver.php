@@ -657,7 +657,7 @@ class WebDriver extends CodeceptionModule implements
     /**
      * Print out latest Selenium Logs in debug mode
      */
-    public function debugWebDriverLogs(TestInterface $test = null): void
+    public function debugWebDriverLogs(?TestInterface $test = null): void
     {
         if ($this->webDriver === null) {
             $this->debug('WebDriver::debugWebDriverLogs method has been called when webDriver is not set');
@@ -901,7 +901,7 @@ class WebDriver extends CodeceptionModule implements
      * // saved to: tests/_output/debug/2017-05-26_14-24-11_4b3403665fea6.png
      * ```
      */
-    public function makeScreenshot(string $name = null): void
+    public function makeScreenshot(?string $name = null): void
     {
         if (empty($name)) {
             $name = uniqid(date("Y-m-d_H-i-s_"));
@@ -931,7 +931,7 @@ class WebDriver extends CodeceptionModule implements
      *
      * @param WebDriverBy|array $selector
      */
-    public function makeElementScreenshot($selector, string $name = null): void
+    public function makeElementScreenshot($selector, ?string $name = null): void
     {
         if (empty($name)) {
             $name = uniqid(date("Y-m-d_H-i-s_"));
@@ -947,7 +947,7 @@ class WebDriver extends CodeceptionModule implements
         $this->debugSection('Screenshot Saved', "file://{$screenName}");
     }
 
-    public function makeHtmlSnapshot(string $name = null): void
+    public function makeHtmlSnapshot(?string $name = null): void
     {
         if (empty($name)) {
             $name = uniqid(date("Y-m-d_H-i-s_"));
@@ -1325,7 +1325,7 @@ class WebDriver extends CodeceptionModule implements
         return reset($arr);
     }
 
-    public function seeLink(string $text, string $url = null): void
+    public function seeLink(string $text, ?string $url = null): void
     {
         $this->enableImplicitWait();
         $nodes = $this->getBaseElement()->findElements(WebDriverBy::partialLinkText($text));
@@ -2765,7 +2765,7 @@ class WebDriver extends CodeceptionModule implements
      * });
      * ```
      */
-    public function switchToWindow(string $name = null): void
+    public function switchToWindow(?string $name = null): void
     {
         $this->webDriver->switchTo()->window($name);
     }
@@ -2792,7 +2792,7 @@ class WebDriver extends CodeceptionModule implements
      *
      * @param string|null $locator (name, CSS or XPath)
      */
-    public function switchToIFrame(string $locator = null): void
+    public function switchToIFrame(?string $locator = null): void
     {
         $this->findAndSwitchToFrame($locator, 'iframe');
     }
@@ -2819,12 +2819,12 @@ class WebDriver extends CodeceptionModule implements
      *
      * @param string|null $locator (name, CSS or XPath)
      */
-    public function switchToFrame(string $locator = null): void
+    public function switchToFrame(?string $locator = null): void
     {
         $this->findAndSwitchToFrame($locator);
     }
 
-    private function findAndSwitchToFrame(string $locator = null, string $tag = 'frame'): void
+    private function findAndSwitchToFrame(?string $locator = null, string $tag = 'frame'): void
     {
         if ($locator === null) {
             $this->webDriver->switchTo()->defaultContent();
@@ -2962,7 +2962,7 @@ class WebDriver extends CodeceptionModule implements
      * @param null|string|array|WebDriverBy $cssOrXPath css or xpath of the web element
      * @throws ElementNotFound
      */
-    public function moveMouseOver($cssOrXPath = null, int $offsetX = null, int $offsetY = null): void
+    public function moveMouseOver($cssOrXPath = null, ?int $offsetX = null, ?int $offsetY = null): void
     {
         $where = null;
         if (null !== $cssOrXPath) {
@@ -2991,7 +2991,7 @@ class WebDriver extends CodeceptionModule implements
      *
      * @throws ElementNotFound
      */
-    public function clickWithLeftButton($cssOrXPath = null, int $offsetX = null, int $offsetY = null): void
+    public function clickWithLeftButton($cssOrXPath = null, ?int $offsetX = null, ?int $offsetY = null): void
     {
         $this->moveMouseOver($cssOrXPath, $offsetX, $offsetY);
         $this->webDriver->getMouse()->click();
@@ -3014,7 +3014,7 @@ class WebDriver extends CodeceptionModule implements
      * @param null|string|array|WebDriverBy $cssOrXPath css or xpath of the web element (body by default).
      * @throws ElementNotFound
      */
-    public function clickWithRightButton($cssOrXPath = null, int $offsetX = null, int $offsetY = null): void
+    public function clickWithRightButton($cssOrXPath = null, ?int $offsetX = null, ?int $offsetY = null): void
     {
         $this->moveMouseOver($cssOrXPath, $offsetX, $offsetY);
         $this->webDriver->getMouse()->contextClick();
@@ -3487,7 +3487,7 @@ class WebDriver extends CodeceptionModule implements
      *
      * @param string|array|WebDriverBy $selector
      */
-    public function scrollTo($selector, int $offsetX = null, int $offsetY = null): void
+    public function scrollTo($selector, ?int $offsetX = null, ?int $offsetY = null): void
     {
         $el = $this->matchFirstOrFail($this->getBaseElement(), $selector);
         $x = $el->getLocation()->getX() + $offsetX;
