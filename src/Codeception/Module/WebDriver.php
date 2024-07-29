@@ -75,7 +75,7 @@ use PHPUnit\Framework\SelfDescribing;
  * selenium-standalone start
  * ```
  *
- * Update configuration in `acceptance.suite.yml`:
+ * Update configuration in `Acceptance.suite.yml`:
  *
  * ```yaml
  * modules:
@@ -87,7 +87,7 @@ use PHPUnit\Framework\SelfDescribing;
  *
  * ## Headless Chrome Browser
  *
- * To enable headless mode (launch tests without showing a window) for Chrome browser using Selenium use this config in `acceptance.suite.yml`:
+ * To enable headless mode (launch tests without showing a window) for Chrome browser using Selenium use this config in `Acceptance.suite.yml`:
  *
  * ```yaml
  * modules:
@@ -120,7 +120,7 @@ use PHPUnit\Framework\SelfDescribing;
  * * Download and install [ChromeDriver](https://sites.google.com/chromium.org/driver/downloads?authuser=0)
  * * Launch ChromeDriver in a separate console window: `chromedriver --url-base=/wd/hub`.
  *
- * Configuration in `acceptance.suite.yml`:
+ * Configuration in `Acceptance.suite.yml`:
  *
  * ```yaml
  * modules:
@@ -144,7 +144,7 @@ use PHPUnit\Framework\SelfDescribing;
  * * [GeckoDriver](https://github.com/mozilla/geckodriver/releases) must be installed
  * * Start GeckoDriver in a separate console window: `geckodriver`.
  *
- * Configuration in `acceptance.suite.yml`:
+ * Configuration in `Acceptance.suite.yml`:
  *
  * ```yaml
  * modules:
@@ -196,9 +196,9 @@ use PHPUnit\Framework\SelfDescribing;
  * 4. If your site is available only locally or via VPN you should use a tunnel app. In this case add `browserstack.local` capability and set it to true.
  *
  * ```yaml
- *     modules:
- *        enabled:
- *           - WebDriver:
+ *  modules:
+ *      enabled:
+ *          - WebDriver:
  *              url: http://mysite.com
  *              host: '<username>:<access key>@hub.browserstack.com'
  *              port: 80
@@ -218,19 +218,19 @@ use PHPUnit\Framework\SelfDescribing;
  * 4. If your website is available only locally or via VPN you should use LambdaTest tunnel. In this case, you can add capability "tunnel":true;.
  *
  * ```yaml
- *    modules:
- *  enabled:
- *    - WebDriver:
-              url: "https://openclassrooms.com"
-              host: 'hub.lambdatest.com'
-              port: 80
-              browser: 'Chrome'
-              capabilities:
-                 LT:Options:
-                  platformName: 'Windows 10'
-                  browserVersion: 'latest-5'
-                  browserName: 'Chrome'
-                  tunnel: true #for Local testing
+ *  modules:
+ *      enabled:
+ *            - WebDriver:
+                  url: "https://openclassrooms.com"
+                  host: 'hub.lambdatest.com'
+                  port: 80
+                  browser: 'Chrome'
+                  capabilities:
+                      LT:Options:
+                      platformName: 'Windows 10'
+                      browserVersion: 'latest-5'
+                      browserName: 'Chrome'
+                      tunnel: true #for Local testing
  * ```
  *
  * ### TestingBot
@@ -241,15 +241,15 @@ use PHPUnit\Framework\SelfDescribing;
  * 4. Run [TestingBot Tunnel](https://testingbot.com/support/other/tunnel) if your site can't be accessed from Internet
  *
  * ```yaml
- *     modules:
- *        enabled:
- *           - WebDriver:
- *              url: http://mysite.com
- *              host: '<key>:<secret>@hub.testingbot.com'
- *              port: 80
- *              browser: chrome
- *              capabilities:
- *                  platformName: Windows 10
+ * modules:
+ *    enabled:
+ *       - WebDriver:
+ *          url: http://mysite.com
+ *          host: '<key>:<secret>@hub.testingbot.com'
+ *          port: 80
+ *          browser: chrome
+ *          capabilities:
+ *              platformName: Windows 10
  * ```
  *
  * ## Configuration
@@ -276,19 +276,19 @@ use PHPUnit\Framework\SelfDescribing;
  * * `webdriver_proxy` - sets http proxy to tunnel requests to the remote Selenium WebDriver through
  * * `webdriver_proxy_port` - sets http proxy server port to tunnel requests to the remote Selenium WebDriver through
  *
- * Example (`acceptance.suite.yml`)
+ * Example (`Acceptance.suite.yml`)
  *
  * ```yaml
- *     modules:
- *        enabled:
- *           - WebDriver:
- *              url: 'http://localhost/'
- *              browser: firefox
- *              window_size: 1024x768
- *              capabilities:
- *                  unhandledPromptBehaviour: 'accept'
- *                  moz:firefoxOptions:
- *                      profile: '~/firefox-profiles/codeception-profile.zip.b64'
+ * modules:
+ *    enabled:
+ *       - WebDriver:
+ *          url: 'http://localhost/'
+ *          browser: firefox
+ *          window_size: 1024x768
+ *          capabilities:
+ *              unhandledPromptBehaviour: 'accept'
+ *              moz:firefoxOptions:
+ *                  profile: '~/firefox-profiles/codeception-profile.zip.b64'
  * ```
  *
  * ## Loading Parts from other Modules
@@ -356,7 +356,8 @@ use PHPUnit\Framework\SelfDescribing;
  *
  * You can inject `\Codeception\Scenario` into your test to get information about the current configuration:
  * ```php
- * use Codeception\Scenario
+ * use Codeception\Scenario;
+ *
  * public function myTest(AcceptanceTester $I, Scenario $scenario)
  * {
  *     if ('firefox' === $scenario->current('browser')) {
@@ -522,7 +523,8 @@ class WebDriver extends CodeceptionModule implements
      * This is how it can be done via `_capabilities` method from `Helper\Acceptance`:
      *
      * ```php
-     * <?php // inside Helper\Acceptance
+     * <?php
+     * // inside Helper\Acceptance
      * public function _before(TestInterface $test)
      * {
      *      $name = $test->getMetadata()->getName();
