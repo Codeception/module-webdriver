@@ -47,7 +47,7 @@ class WebDriver extends Page
      * @param string|array|WebDriverBy $selector
      * @param ComparisonFailure|null $comparisonFailure
      */
-    protected function fail($nodes, $selector, ComparisonFailure $comparisonFailure = null): never
+    protected function fail($nodes, $selector, ?ComparisonFailure $comparisonFailure = null): never
     {
         if (count($nodes) === 0) {
             throw new ElementNotFound($selector, 'Element located either by name, CSS or XPath');
@@ -89,7 +89,7 @@ class WebDriver extends Page
      * @param string|null $contains
      * @return string
      */
-    protected function nodesList(array $nodes, string $contains = null): string
+    protected function nodesList(array $nodes, ?string $contains = null): string
     {
         $output = "";
         foreach ($nodes as $node) {
