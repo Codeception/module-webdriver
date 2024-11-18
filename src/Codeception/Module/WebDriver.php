@@ -117,7 +117,7 @@ use PHPUnit\Framework\SelfDescribing;
  *
  * ### ChromeDriver
  *
- * * Download and install [ChromeDriver](https://sites.google.com/chromium.org/driver/downloads?authuser=0)
+ * * Download and install [ChromeDriver](https://sites.google.com/chromium.org/driver/downloads)
  * * Launch ChromeDriver in a separate console window: `chromedriver --url-base=/wd/hub`.
  *
  * Configuration in `Acceptance.suite.yml`:
@@ -136,7 +136,7 @@ use PHPUnit\Framework\SelfDescribing;
  *                  prefs:
  *                      download.default_directory: "..."
  * ```
- * See here for additional [Chrome options](https://sites.google.com/a/chromium.org/chromedriver/capabilities)
+ * See here for additional [Chrome options](https://sites.google.com/chromium.org/driver/capabilities)
  *
  *
  * ### GeckoDriver
