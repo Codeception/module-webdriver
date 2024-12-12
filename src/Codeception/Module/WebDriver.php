@@ -3149,18 +3149,20 @@ class WebDriver extends CodeceptionModule implements
 
     /**
      * Presses the given key on the given element.
-     * To specify a character and modifier (e.g. <kbd>Ctrl</kbd>, Alt, Shift, Meta), pass an array for `$char` with
+     * To specify a character and modifier (e.g. <kbd>Ctrl</kbd>, <kbd>Alt</kbd>, <kbd>Shift</kbd>, <kbd>Meta</kbd>), pass an array for `$char` with
      * the modifier as the first element and the character as the second.
      * For special keys, use the constants from [`Facebook\WebDriver\WebDriverKeys`](https://github.com/php-webdriver/php-webdriver/blob/main/lib/WebDriverKeys.php).
      *
      * ``` php
      * <?php
+     * use Facebook\WebDriver\WebDriverKeys;
+     *
      * // <input id="page" value="old">
      * $I->pressKey('#page', 'a'); // => olda
-     * $I->pressKey('#page', ['ctrl', 'a'],'new'); //=> new
-     * $I->pressKey('#page', ['shift', '111'],'1','x'); //=> old!!!1x
-     * $I->pressKey('descendant-or-self::*[@id='page']','u'); //=> oldu
-     * $I->pressKey('#name', ['ctrl', 'a'], \Facebook\WebDriver\WebDriverKeys::DELETE); //=>''
+     * $I->pressKey('#page', ['ctrl', 'a'],'new'); // => new
+     * $I->pressKey('#page', ['shift', '111'],'1','x'); // => old!!!1x
+     * $I->pressKey('descendant-or-self::*[@id='page']','u'); // => oldu
+     * $I->pressKey('#name', ['ctrl', 'a'], WebDriverKeys::DELETE); // => ''
      * ```
      *
      * @param string|array|WebDriverBy $element
