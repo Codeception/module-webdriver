@@ -2283,7 +2283,7 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Reloads the current page.
+     * Reloads the current page. All forms will be reset, so the outcome is as if the user would press <kbd>Ctrl</kbd>+<kbd>F5</kbd>.
      */
     public function reloadPage(): void
     {
