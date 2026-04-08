@@ -2673,6 +2673,7 @@ class WebDriver extends CodeceptionModule implements
      * $I->waitForText('foo', 30, '.title'); // secs
      * ```
      *
+     * @param string $text The text to be present
      * @param int $timeout seconds
      * @param null|string|array|WebDriverBy $selector
      * @throws Exception
