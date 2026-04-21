@@ -2284,6 +2284,7 @@ class WebDriver extends CodeceptionModule implements
 
     /**
      * Reloads the current page. All forms will be reset, so the outcome is as if the user would press <kbd>Ctrl</kbd>+<kbd>F5</kbd>.
+     * To reload the page without resetting everything (i.e. <kbd>F5</kbd>), you can use <code>$I->executeJS('location.reload();');</code>
      */
     public function reloadPage(): void
     {
