@@ -2953,7 +2953,7 @@ class WebDriver extends CodeceptionModule implements
      * then the mouse is moved to an offset of the element's top-left corner.
      * Otherwise, the mouse is moved to the center of the element.
      *
-     * ``` php
+     * ```php
      * <?php
      * $I->moveMouseOver(['css' => '.checkout']);
      * $I->moveMouseOver(null, 20, 50);
@@ -2975,21 +2975,21 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Performs click with the left mouse button on an element.
-     * If the first parameter `null` then the offset is relative to the actual mouse position.
-     * If the second and third parameters are given,
-     * then the mouse is moved to an offset of the element's top-left corner.
-     * Otherwise, the mouse is moved to the center of the element.
+     * Performs a click with the left mouse button.
+     * If the first parameter is given, then the offset is measured from the center of that element.
+     * If the first parameter is `null`, then the offset is relative to the actual mouse position.
+     * To debug, you can use `clickWithRightButton()` and see where the context menu is located.
      *
-     * ``` php
+     * ```php
      * <?php
      * $I->clickWithLeftButton(['css' => '.checkout']);
      * $I->clickWithLeftButton(null, 20, 50);
      * $I->clickWithLeftButton(['css' => '.checkout'], 20, 50);
      * ```
      *
-     * @param null|string|array|WebDriverBy $cssOrXPath css or xpath of the web element (body by default).
-     *
+     * @param null|string|array|WebDriverBy $cssOrXPath css or xpath of the web element (default: `<body>`).
+     * @param ?int $offsetX Positive number moves to the right
+     * @param ?int $offsetY Positive number moves downwards
      * @throws ElementNotFound
      */
     public function clickWithLeftButton($cssOrXPath = null, ?int $offsetX = null, ?int $offsetY = null): void
@@ -2999,18 +2999,7 @@ class WebDriver extends CodeceptionModule implements
     }
 
     /**
-     * Performs contextual click with the right mouse button on an element.
-     * If the first parameter `null` then the offset is relative to the actual mouse position.
-     * If the second and third parameters are given,
-     * then the mouse is moved to an offset of the element's top-left corner.
-     * Otherwise, the mouse is moved to the center of the element.
-     *
-     * ``` php
-     * <?php
-     * $I->clickWithRightButton(['css' => '.checkout']);
-     * $I->clickWithRightButton(null, 20, 50);
-     * $I->clickWithRightButton(['css' => '.checkout'], 20, 50);
-     * ```
+     * See <a href="#clickWithLeftButton">clickWithLeftButton()</a>
      *
      * @param null|string|array|WebDriverBy $cssOrXPath css or xpath of the web element (body by default).
      * @throws ElementNotFound
@@ -3020,7 +3009,6 @@ class WebDriver extends CodeceptionModule implements
         $this->moveMouseOver($cssOrXPath, $offsetX, $offsetY);
         $this->webDriver->getMouse()->contextClick();
     }
-
 
     /**
      * Performs a double click on an element matched by CSS or XPath.
