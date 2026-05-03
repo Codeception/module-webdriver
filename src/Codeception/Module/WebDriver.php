@@ -3157,15 +3157,16 @@ class WebDriver extends CodeceptionModule implements
      * ``` php
      * <?php
      * // <input id="page" value="old">
+     * use Facebook\WebDriver\WebDriverKeys;
      * $I->pressKey('#page', 'a'); // => olda
-     * $I->pressKey('#page', ['ctrl', 'a'],'new'); // => new
-     * $I->pressKey('#page', ['shift', '111'], '1', 'x'); // => old!!!1x
+     * $I->pressKey('#page', [WebDriverKeys::CONTROL, 'a'], 'new'); // => new
+     * $I->pressKey('#page', [WebDriverKeys::SHIFT, '111'], '1', 'x'); // => old!!!1x
      * $I->pressKey('descendant-or-self::*[@id='page']', 'u'); // => oldu
-     * $I->pressKey('#name', ['ctrl', 'a'], \Facebook\WebDriver\WebDriverKeys::DELETE); // =>''
+     * $I->pressKey('#page', [WebDriverKeys::CONTROL, 'a'], WebDriverKeys::DELETE); // => ''
      * ```
      *
      * @param string|array|WebDriverBy $element
-     * @param string|list<string> $chars Can be char or array with modifier. You can provide several chars.
+     * @param string|list<string> ...$chars A single character, or an array with a modifier key. Separate several `$chars` with comma.
      * @throws ElementNotFound
      */
     public function pressKey($element, ...$chars): void
